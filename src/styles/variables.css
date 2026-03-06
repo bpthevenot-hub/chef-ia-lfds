@@ -1,0 +1,53 @@
+/* ═══════════════════════════════════════════════════════════ */
+/*  LE CHEF IA — DESIGN TOKENS                                */
+/* ═══════════════════════════════════════════════════════════ */
+
+:root {
+  /* Backgrounds */
+  --bg-dark: #0a0908;
+  --bg-dark-2: #1a1714;
+  --bg-dark-3: #252118;
+  --bg-warm: #f3f0e8;
+  --bg-warm-2: #e8e4d8;
+  --white: #ffffff;
+  --cream: #ede8db;
+
+  /* Gold palette */
+  --gold: #9a7d3e;
+  --gold-light: #b89a50;
+  --gold-pale: #d4bb78;
+  --gold-rich: #7a6020;
+  --gold-glow: rgba(154, 125, 62, 0.18);
+  --gold-glow-strong: rgba(154, 125, 62, 0.35);
+
+  /* Text */
+  --text-light: #f0ebe0;
+  --text-dark: #151210;
+  --text-dark-2: #2d2820;
+  --text-muted: #6a6358;
+
+  /* French tricolor */
+  --navy: #002395;
+  --red: #ED2939;
+
+  /* Typography */
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Inter', -apple-system, sans-serif;
+
+  /* Spacing */
+  --radius: 20px;
+  --radius-sm: 14px;
+  --radius-xs: 10px;
+  --header-h: 52px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.07);
+  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.10);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.14);
+  --shadow-gold: 0 8px 40px rgba(154, 125, 62, 0.35);
+
+  /* Easings */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-luxe: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}

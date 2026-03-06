@@ -1,0 +1,20 @@
+/* ═══ CATEGORY SELECT ═══ */
+
+.category-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 0.8rem 0;
+}
+
+/* Third card spans full width */
+.category-grid .photo-card:nth-child(3) {
+  grid-column: 1 / -1;
+  height: clamp(140px, 25vh, 200px);
+}
+
+@media (max-width: 480px) {
+  .category-grid {
+    gap: 0.8rem;
+  }
+}

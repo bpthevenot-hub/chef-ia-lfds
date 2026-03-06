@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Le Chef IA — La Française des Sauces</title>
+<meta name="description" content="Composez votre assiette idéale avec l'Harmonie Secrète by La Française des Sauces.">
+<meta name="theme-color" content="#f3f0e8">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧈</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════ */
+/*  LE CHEF IA — V7 — PHOTO-REALISTIC EXPERIENCE             */
+/* ═══════════════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f3f0e8;--bg-warm:#e8e4d8;--white:#ffffff;
+  --surface:#e5e1d6;--surface-2:#d5d0c3;
+  --gold:#9a7d3e;--gold-light:#b89a50;--gold-pale:#d4bb78;--gold-rich:#7a6020;
+  --gold-glow:rgba(154,125,62,0.18);--gold-glow-strong:rgba(154,125,62,0.35);
+  --dark-bg:#1a1714;--dark-bg-2:#252118;--dark-text:#f0ebe0;
+  --text:#151210;--text-2:#2d2820;--text-3:#6a6358;--cream:#ede8db;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Inter',-apple-system,sans-serif;
+  --radius:20px;--radius-sm:14px;
+  --shadow-sm:0 2px 12px rgba(0,0,0,0.07);
+  --shadow-md:0 8px 32px rgba(0,0,0,0.10);
+  --shadow-lg:0 20px 60px rgba(0,0,0,0.14);
+  --shadow-gold:0 8px 32px rgba(154,125,62,0.25);
+  --ease:cubic-bezier(0.4,0,0.2,1);
+  --ease-out:cubic-bezier(0.0,0,0.2,1);
+  --ease-spring:cubic-bezier(0.34,1.56,0.64,1);
+  --ease-luxe:cubic-bezier(0.22,1,0.36,1);
+}
+html{height:100%;-webkit-tap-highlight-color:transparent}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:100%;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* ─── HEADER ─── */
+.app-header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:12px 20px;background:rgba(20,18,14,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(154,125,62,0.15);transform:translateY(-100%);transition:transform 0.5s var(--ease-luxe)}
+.app-header.visible{transform:translateY(0)}
+.header-logo{height:36px;width:auto;opacity:0.9}
+.header-tri{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:60px;height:2px;background:linear-gradient(90deg,#002395 33%,#fff 33% 66%,#ED2939 66%);border-radius:1px}
+
+/* ─── SCREENS ─── */
+.screen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:68px 1.5rem 2rem;opacity:0;pointer-events:none;transition:opacity 0.6s var(--ease),transform 0.6s var(--ease-luxe);transform:translateY(20px);overflow-y:auto}
+.screen-welcome-dark{justify-content:center!important;padding-top:2rem!important}
+.screen.active{opacity:1;pointer-events:auto;transform:translateY(0)}
+.screen.exit-up{opacity:0;transform:translateY(-30px);pointer-events:none}
+.screen-inner{max-width:560px;width:100%;text-align:center}
+
+/* ─── TYPOGRAPHY ─── */
+.title{font-family:var(--serif);font-size:clamp(2.2rem,6vw,3.4rem);font-weight:500;color:var(--text);line-height:1.15;margin-bottom:0.5rem}
+.title .accent{color:var(--gold)}
+.subtitle{font-family:var(--sans);font-size:0.95rem;font-weight:400;color:var(--text-2);line-height:1.5;margin-bottom:1.5rem}
+.step-label{font-family:var(--sans);font-size:0.7rem;font-weight:600;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem}
+.section-label{font-family:var(--sans);font-size:0.72rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--text-3);margin:1.2rem 0 0.7rem}
+
+/* ─── CARDS ─── */
+.choices-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:0.8rem 0}
+.choice-card{position:relative;background:var(--white);border:2px solid rgba(154,125,62,0.08);border-radius:var(--radius);padding:1.8rem 1rem;cursor:pointer;transition:all 0.35s var(--ease);box-shadow:var(--shadow-sm);-webkit-user-select:none;user-select:none}
+.choice-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:rgba(154,125,62,0.15)}
+.choice-card:active{transform:scale(0.97)}
+.choice-card.selected{border-color:var(--gold);background:linear-gradient(135deg,rgba(154,125,62,0.06),rgba(154,125,62,0.02));box-shadow:var(--shadow-gold)}
+.card-emoji{font-size:3rem;display:block;margin-bottom:0.6rem}
+.card-label{font-family:var(--serif);font-size:1.25rem;font-weight:600;color:var(--text)}
+.check-badge{position:absolute;top:10px;right:10px;width:26px;height:26px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0);transition:all 0.3s var(--ease-spring)}
+.choice-card.selected .check-badge{opacity:1;transform:scale(1)}
+.check-badge::after{content:'✓';color:white;font-size:14px;font-weight:700}
+
+/* ═══ PHOTO CARDS — LUXE ═══ */
+.photo-choices{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:0.8rem 0}
+.photo-card{position:relative;border-radius:var(--radius);overflow:hidden;cursor:pointer;height:clamp(220px,42vh,320px);-webkit-user-select:none;user-select:none;transition:all 0.4s var(--ease);box-shadow:var(--shadow-md);border:2px solid transparent}
+.photo-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.photo-card:active{transform:scale(0.97)}
+.photo-card.selected{border-color:var(--gold);box-shadow:0 8px 40px rgba(154,125,62,0.35)}
+.photo-card-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 0.6s var(--ease)}
+.photo-card:hover .photo-card-bg{transform:scale(1.06)}
+.photo-card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,8,5,0.85) 0%,rgba(10,8,5,0.3) 45%,rgba(10,8,5,0.08) 100%)}
+.photo-card-content{position:absolute;bottom:0;left:0;right:0;padding:1.4rem 1rem;text-align:center;z-index:2}
+.photo-card-icon{width:48px;height:48px;border-radius:50%;border:1.5px solid rgba(212,187,120,0.5);background:rgba(154,125,62,0.12);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;margin:0 auto 0.7rem;transition:all 0.35s var(--ease)}
+.photo-card-icon svg{width:24px;height:24px;stroke:var(--gold-pale);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.photo-card:hover .photo-card-icon{border-color:var(--gold-pale);background:rgba(154,125,62,0.2)}
+.photo-card.selected .photo-card-icon{border-color:var(--gold);background:rgba(154,125,62,0.3)}
+.photo-card-name{font-family:var(--serif);font-size:1.35rem;font-weight:500;color:#f0ebe0;letter-spacing:0.5px;margin-bottom:0.2rem}
+.photo-card-sub{font-family:var(--sans);font-size:0.72rem;font-weight:400;color:rgba(240,235,224,0.5);letter-spacing:1.5px;text-transform:uppercase}
+.photo-card .check-badge{top:12px;right:12px;width:28px;height:28px;box-shadow:0 2px 10px rgba(154,125,62,0.4)}
+
+/* ─── BUTTONS ─── */
+.btn-primary{display:inline-flex;align-items:center;justify-content:center;min-width:220px;padding:16px 36px;background:linear-gradient(135deg,var(--gold),var(--gold-rich));color:var(--cream);font-family:var(--sans);font-size:0.85rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;border:none;border-radius:60px;cursor:pointer;box-shadow:0 4px 20px rgba(154,125,62,0.3);transition:all 0.35s var(--ease)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(154,125,62,0.4)}
+.btn-primary:active{transform:scale(0.97)}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:transparent;color:var(--text-2);font-family:var(--sans);font-size:0.8rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;border:2px solid var(--surface-2);border-radius:60px;cursor:pointer;transition:all 0.3s var(--ease)}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ─── INPUT ─── */
+.free-input{width:100%;padding:14px 18px 14px 42px;font-family:var(--sans);font-size:0.95rem;color:var(--text);background:var(--white);border:2px solid var(--surface-2);border-radius:var(--radius-sm);outline:none;transition:border-color 0.3s var(--ease)}
+.free-input::placeholder{color:var(--text-3)}
+.free-input:focus{border-color:var(--gold)}
+.input-wrap{position:relative;margin:0.8rem 0}
+.input-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:1.1rem}
+
+/* ═══ WELCOME — DARK ═══ */
+.screen-welcome-dark{background:#0a0a08!important}
+.welcome-logo{width:280px;max-width:70vw;height:auto;filter:drop-shadow(0 0 50px rgba(154,125,62,0.3)) drop-shadow(0 4px 16px rgba(0,0,0,0.3));animation:reveal 1.4s var(--ease-luxe) 0.2s both}
+@keyframes reveal{from{opacity:0;transform:translateY(20px) scale(0.92)}to{opacity:1;transform:translateY(0) scale(1)}}
+.welcome-tri{width:70px;height:3px;margin:1rem auto;background:linear-gradient(90deg,#002395 33%,#fff 33% 66%,#ED2939 66%);border-radius:2px;animation:reveal 1s var(--ease-luxe) 0.6s both}
+.welcome-title{font-family:var(--serif);font-size:clamp(1.8rem,5vw,2.6rem);font-weight:400;color:#f0ebe0;line-height:1.2;margin-bottom:1.5rem;animation:reveal 1.2s var(--ease-luxe) 0.8s both}
+.welcome-title .accent{color:var(--gold-pale)}
+.welcome-cta{animation:reveal 1.2s var(--ease-luxe) 1s both;margin-bottom:1.5rem}
+
+/* Jar 3D Cylinder */
+.jar-3d-wrap{perspective:600px;width:200px;height:220px;margin:0 auto;cursor:grab;-webkit-user-select:none;user-select:none;animation:reveal 1.2s var(--ease-luxe) 1.2s both;position:relative}
+.jar-3d-wrap:active{cursor:grabbing}
+.jar-3d-cylinder{position:relative;width:100%;height:100%;transform-style:preserve-3d;transform:rotateX(2deg) rotateY(0deg)}
+.jar-3d-panel{position:absolute;left:50%;top:0;height:220px;backface-visibility:hidden;background-image:url('https://l-fds.com/cdn/shop/files/92D989F1-3F39-4DBA-B1B2-5671BB8FCCA2.png?v=1769201672');background-size:200px auto;background-repeat:no-repeat;background-position-y:center}
+/* Shadow under cylinder */
+.jar-3d-shadow{position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);width:120px;height:20px;background:radial-gradient(ellipse,rgba(0,0,0,0.35) 0%,transparent 70%);border-radius:50%;pointer-events:none;transition:transform 0.1s}
+.jar-360-hint{font-family:var(--sans);font-size:0.7rem;color:rgba(240,235,224,0.35);letter-spacing:1.5px;text-transform:uppercase;margin-top:0.6rem;animation:reveal 1s var(--ease-luxe) 1.6s both;transition:opacity 0.5s}
+.jar-360-hint.hidden{opacity:0}
+
+/* Floating particles on dark welcome */
+.particles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.particle{position:absolute;width:4px;height:4px;background:var(--gold-pale);border-radius:50%;opacity:0;animation:drift 8s linear infinite}
+@keyframes drift{0%{opacity:0;transform:translateY(100vh) scale(0.5)}10%{opacity:0.6}90%{opacity:0.3}100%{opacity:0;transform:translateY(-20vh) scale(1.2)}}
+
+/* ═══ DARK SCREEN ═══ */
+.screen-dark{background:var(--dark-bg);color:var(--dark-text)}
+.screen-dark .title{color:var(--dark-text)}
+.screen-dark .subtitle{color:rgba(240,235,224,0.7)}
+.screen-dark .step-label{color:var(--gold-pale)}
+
+/* ═══════════════════════════════════════ */
+/*  COOKING THEATER — PHOTO-REALISTIC     */
+/* ═══════════════════════════════════════ */
+.cooking-theater{
+  position:relative;width:100%;max-width:440px;
+  height:400px;margin:0 auto;
+  border-radius:24px;overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,0.4);
+  background:#111;
+}
+
+.chef-scene{
+  position:absolute;inset:0;
+  opacity:0;transform:scale(1.02);
+  transition:opacity 0.8s var(--ease),transform 0.8s var(--ease-luxe);
+  z-index:2;
+}
+.chef-scene.active{opacity:1;transform:scale(1)}
+.chef-scene.exit{opacity:0;transform:scale(0.98)}
+
+/* Photo fill */
+.scene-photo{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center;
+  transition:transform 0.3s;
+}
+/* Ken Burns — subtle slow zoom on active scene */
+.chef-scene.active .scene-photo{
+  animation:kenburns 3.5s ease-out forwards;
+}
+@keyframes kenburns{
+  from{transform:scale(1)}
+  to{transform:scale(1.08)}
+}
+
+/* Dark gradient overlay at bottom for text */
+.scene-gradient{
+  position:absolute;bottom:0;left:0;right:0;height:55%;
+  background:linear-gradient(to top,rgba(0,0,0,0.75) 0%,rgba(0,0,0,0.3) 50%,transparent 100%);
+  z-index:3;
+}
+/* Top vignette */
+.scene-gradient::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:30%;
+  background:linear-gradient(to bottom,rgba(0,0,0,0.2),transparent);
+}
+
+/* Scene text */
+.scene-label{
+  position:absolute;bottom:24px;left:0;right:0;
+  text-align:center;z-index:5;
+}
+.scene-step{
+  font-family:var(--sans);font-size:0.65rem;font-weight:600;
+  letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold-pale);opacity:0.8;margin-bottom:4px;
+}
+.scene-title{
+  font-family:var(--serif);font-size:1.4rem;font-weight:500;
+  color:rgba(255,255,255,0.95);
+  text-shadow:0 2px 8px rgba(0,0,0,0.4);
+}
+
+/* ═══ SAUCE HERO SCENE (Scene 4) — Special treatment ═══ */
+.scene-sauce{
+  background:radial-gradient(ellipse at 50% 55%,rgba(154,125,62,0.2) 0%,rgba(26,23,20,1) 70%);
+}
+.sauce-hero{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  z-index:2;
+}
+.sauce-jar-hero{
+  width:160px;height:auto;
+  filter:drop-shadow(0 0 60px rgba(154,125,62,0.4)) drop-shadow(0 10px 30px rgba(0,0,0,0.5));
+  transform:scale(0.8);opacity:0;
+}
+.chef-scene.active .sauce-jar-hero{
+  animation:jar-hero-in 1.2s var(--ease-luxe) 0.15s forwards;
+}
+@keyframes jar-hero-in{
+  0%{opacity:0;transform:scale(0.6) rotate(-8deg)}
+  50%{opacity:1;transform:scale(1.05) rotate(2deg)}
+  100%{opacity:1;transform:scale(1) rotate(0deg)}
+}
+/* Gold pulse behind jar */
+.sauce-glow{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:250px;height:250px;border-radius:50%;
+  background:radial-gradient(circle,rgba(154,125,62,0.25) 0%,rgba(154,125,62,0.08) 40%,transparent 70%);
+  opacity:0;z-index:1;
+}
+.chef-scene.active .sauce-glow{
+  animation:glow-pulse 2.5s ease-in-out infinite 0.3s;
+}
+@keyframes glow-pulse{
+  0%,100%{opacity:0.5;transform:translate(-50%,-50%) scale(1)}
+  50%{opacity:0.9;transform:translate(-50%,-50%) scale(1.12)}
+}
+/* Floating gold particles around jar */
+.sauce-sparkle{
+  position:absolute;width:3px;height:3px;background:var(--gold-pale);
+  border-radius:50%;opacity:0;z-index:3;
+}
+.chef-scene.active .sauce-sparkle{
+  animation:sparkle 2s ease-out infinite;
+}
+@keyframes sparkle{
+  0%{opacity:0;transform:translateY(0) scale(0.5)}
+  30%{opacity:0.8}
+  100%{opacity:0;transform:translateY(-50px) scale(1)}
+}
+
+/* Progress bar */
+.cook-progress{
+  width:100%;max-width:440px;height:4px;
+  margin:12px auto 0;
+  background:rgba(255,255,255,0.08);
+  border-radius:2px;overflow:hidden;
+}
+.cook-progress-fill{
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--gold),var(--gold-light));
+  border-radius:2px;
+  transition:width 0.5s var(--ease);
+}
+
+/* ═══════════════════════════════════════ */
+/*  FINAL PLATE — 3D INTERACTIVE          */
+/* ═══════════════════════════════════════ */
+.plate-scene{perspective:1200px;width:340px;height:340px;margin:0 auto 1rem;cursor:grab;position:relative}
+.plate-scene:active{cursor:grabbing}
+.plate-3d{width:100%;height:100%;transform-style:preserve-3d;transform:rotateX(55deg) rotateY(0deg);transition:transform 0.1s linear;position:relative}
+.plate-base{position:absolute;inset:0;border-radius:50%;background:linear-gradient(160deg,#fff 0%,#f8f5ed 40%,#eee9dc 80%,#e5dfd0 100%);box-shadow:0 2px 4px rgba(0,0,0,0.04),0 4px 12px rgba(0,0,0,0.06),0 12px 40px rgba(0,0,0,0.10),0 25px 60px rgba(0,0,0,0.08),inset 0 1px 2px rgba(255,255,255,0.9),inset 0 -3px 10px rgba(0,0,0,0.03)}
+.plate-rim-outer{position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(0,0,0,0.06)}
+.plate-rim-inner{position:absolute;inset:20px;border-radius:50%;border:1px solid rgba(0,0,0,0.04)}
+.plate-rim-gold{position:absolute;inset:8px;border-radius:50%;border:0.5px solid rgba(154,125,62,0.12)}
+.plate-drizzle{position:absolute;bottom:38%;left:45%;width:80px;height:40px;background:radial-gradient(ellipse,rgba(201,168,78,0.25),rgba(160,128,48,0.1) 50%,transparent 80%);border-radius:50%;transform:translateZ(2px);opacity:0;animation:drizzle-show 0.8s var(--ease) 1.5s forwards}
+@keyframes drizzle-show{to{opacity:1}}
+
+.plate-food{position:absolute;border-radius:50%;overflow:hidden;cursor:pointer;transform:translateZ(15px);box-shadow:0 8px 25px rgba(0,0,0,0.25),0 2px 8px rgba(0,0,0,0.1);border:3px solid rgba(255,255,255,0.6);transition:transform 0.3s var(--ease-spring),box-shadow 0.3s var(--ease);opacity:0}
+.plate-food:hover{transform:translateZ(30px) scale(1.08);box-shadow:0 12px 35px rgba(0,0,0,0.3),0 4px 12px rgba(0,0,0,0.15)}
+.plate-food img{width:100%;height:100%;object-fit:cover;display:block}
+.plate-food .emoji-fb{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--cream);font-size:2rem}
+.food-protein{width:120px;height:120px;top:25%;left:50%;margin-left:-60px;z-index:3}
+.food-starch{width:90px;height:90px;bottom:22%;left:12%;z-index:2}
+.food-side{width:85px;height:85px;bottom:22%;right:12%;z-index:2}
+.food-extra{width:60px;height:60px;top:15%;right:20%;z-index:2}
+.plate-food.show{animation:food-land 0.7s var(--ease-spring) forwards}
+@keyframes food-land{0%{opacity:0;transform:translateZ(60px) scale(0.3)}60%{transform:translateZ(20px) scale(1.06)}100%{opacity:1;transform:translateZ(15px) scale(1)}}
+.plate-jar{position:absolute;bottom:-20px;right:-20px;width:80px;height:auto;filter:drop-shadow(0 6px 18px rgba(0,0,0,0.2));transform:translateZ(25px);opacity:0;animation:jar-arrive 0.6s var(--ease-spring) 2s forwards}
+@keyframes jar-arrive{0%{opacity:0;transform:translateZ(25px) scale(0) rotate(-20deg)}60%{transform:translateZ(25px) scale(1.08) rotate(3deg)}100%{opacity:1;transform:translateZ(25px) scale(1) rotate(0deg)}}
+.steam-group{position:absolute;top:-10px;left:50%;transform:translateX(-50%) translateZ(20px);display:flex;gap:12px}
+.steam-ln{width:2px;border-radius:50%;background:linear-gradient(to top,rgba(180,175,165,0.3),transparent);animation:steam-rise 2.8s ease-out infinite}
+.steam-ln:nth-child(1){height:35px;animation-delay:0s}
+.steam-ln:nth-child(2){height:28px;animation-delay:0.8s}
+.steam-ln:nth-child(3){height:20px;animation-delay:1.6s}
+@keyframes steam-rise{0%{transform:translateY(0) scaleX(1);opacity:0.5}50%{transform:translateY(-18px) scaleX(1.8);opacity:0.2}100%{transform:translateY(-35px) scaleX(2.5);opacity:0}}
+
+.rotation-hint{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:0.5rem;font-size:0.78rem;color:var(--text-3);opacity:0;animation:hint-show 0.6s var(--ease) 2.5s forwards;transition:opacity 0.5s var(--ease)}
+.rotation-hint.hidden{opacity:0!important}
+@keyframes hint-show{to{opacity:0.8}}
+.hint-icon{display:inline-flex;animation:hint-rot 2s ease-in-out infinite}
+@keyframes hint-rot{0%,100%{transform:rotate(0)}25%{transform:rotate(-15deg)}75%{transform:rotate(15deg)}}
+
+/* ─── ZOOM ─── */
+.zoom-overlay{position:fixed;inset:0;z-index:200;background:rgba(10,9,7,0.88);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.4s var(--ease);padding:2rem}
+.zoom-overlay.active{opacity:1;pointer-events:auto}
+.zoom-close{position:absolute;top:20px;right:20px;width:44px;height:44px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:white;font-size:1.2rem;transition:background 0.3s}
+.zoom-close:hover{background:rgba(255,255,255,0.2)}
+.zoom-img-wrap{width:min(85vw,500px);height:min(85vw,500px);border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.4);background:var(--cream)}
+.zoom-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform 0.3s var(--ease);transform-origin:center}
+.zoom-img-wrap.zoomed img{transform:scale(2)}
+.zoom-info{text-align:center;margin-top:1.2rem;color:rgba(255,255,255,0.9)}
+.zoom-name{font-family:var(--serif);font-size:1.6rem;font-weight:500;margin-bottom:0.3rem}
+.zoom-desc{font-size:0.85rem;color:rgba(255,255,255,0.6)}
+.zoom-tip{font-size:0.72rem;color:rgba(255,255,255,0.35);margin-top:1rem}
+
+/* ─── RECIPE CARD ─── */
+.recipe-card{background:var(--white);border-radius:var(--radius);padding:1.8rem 2rem;max-width:380px;margin:1.5rem auto;box-shadow:var(--shadow-md);text-align:left;opacity:0;transform:translateY(20px);transition:all 0.6s var(--ease-luxe)}
+.recipe-card.visible{opacity:1;transform:translateY(0)}
+.recipe-name{font-family:var(--serif);font-size:1.6rem;font-weight:600;color:var(--text);margin-bottom:0.2rem}
+.recipe-tagline{font-family:var(--serif);font-size:0.95rem;font-style:italic;color:var(--gold)}
+.recipe-divider{width:40px;height:2px;background:var(--gold);margin:1rem 0;border-radius:1px}
+.recipe-ingredients{list-style:none}
+.recipe-ingredients li{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid rgba(0,0,0,0.04);font-size:0.95rem;color:var(--text-2)}
+.recipe-ingredients li:last-child{border-bottom:none}
+.ing-emoji{font-size:1.3rem;width:28px;text-align:center}
+.recipe-tip{margin-top:1rem;padding:12px 16px;background:var(--cream);border-left:3px solid var(--gold);border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:0.85rem;font-style:italic;color:var(--text-2);line-height:1.5}
+
+.app-footer{position:fixed;bottom:0;left:0;right:0;padding:10px;text-align:center;font-size:0.65rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-3);background:linear-gradient(to top,var(--bg),transparent);pointer-events:none;z-index:50}
+
+@media(max-width:480px){
+  .plate-scene{width:280px;height:280px}
+  .food-protein{width:100px;height:100px;margin-left:-50px}
+  .food-starch{width:75px;height:75px}
+  .food-side{width:70px;height:70px}
+  .food-extra{width:50px;height:50px}
+  .cooking-theater{height:340px}
+  .sauce-jar-hero{width:130px}
+}
+</style>
+</head>
+<body>
+
+<header class="app-header" id="appHeader">
+  <img src="https://l-fds.com/cdn/shop/files/84AAFEE7-23FA-4134-AA98-6196210200FC.png?v=1769643841" alt="LFDS" class="header-logo">
+  <div class="header-tri"></div>
+</header>
+
+<!-- ═══ WELCOME ═══ -->
+<div class="screen screen-welcome-dark active" id="screen-welcome">
+  <div class="particles" id="particles"></div>
+  <div class="screen-inner">
+    <img src="https://l-fds.com/cdn/shop/files/84AAFEE7-23FA-4134-AA98-6196210200FC.png?v=1769643841" alt="La Française des Sauces" class="welcome-logo">
+    <div class="welcome-tri"></div>
+    <h1 class="welcome-title">Les recettes de<br>La Française <span class="accent">Des Sauces</span></h1>
+    <div class="welcome-cta">
+      <button class="btn-primary" onclick="goTo('category')">Créer votre plat</button>
+    </div>
+    <div class="jar-3d-wrap" id="jar3dWrap">
+      <div class="jar-3d-cylinder" id="jar3dCyl"></div>
+      <div class="jar-3d-shadow" id="jar3dShadow"></div>
+    </div>
+    <div class="jar-360-hint" id="jarHint">↔ Glissez pour tourner</div>
+  </div>
+</div>
+
+<!-- ═══ CATEGORY ═══ -->
+<div class="screen" id="screen-category">
+  <div class="screen-inner">
+    <div class="step-label">— Étape 1 —</div>
+    <h2 class="title">Votre <span class="accent">protéine</span></h2>
+    <p class="subtitle">Que souhaitez-vous déguster ?</p>
+    <div class="photo-choices">
+      <div class="photo-card" onclick="selectCategory('viande')">
+        <span class="check-badge"></span>
+        <div class="photo-card-bg" style="background-image:url('https://images.unsplash.com/photo-1588168333986-5078d3ae3976?w=500&h=700&fit=crop&q=80')"></div>
+        <div class="photo-card-overlay"></div>
+        <div class="photo-card-content">
+          <div class="photo-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 14c0-4 3-8 8-9.5C17 6 20 10 20 14c0 3-2.5 5.5-5.5 5.5-1.2 0-2.3-.4-3.2-1.1A5.5 5.5 0 018 19.5 5.5 5.5 0 014 14z"/><path d="M10 13c0-1.5 1-2.5 2-2.5s2 1 2 2.5"/></svg>
+          </div>
+          <div class="photo-card-name">Viande</div>
+          <div class="photo-card-sub">Pièce noble</div>
+        </div>
+      </div>
+      <div class="photo-card" onclick="selectCategory('poisson')">
+        <span class="check-badge"></span>
+        <div class="photo-card-bg" style="background-image:url('https://images.unsplash.com/photo-1599084993091-1cb5c0721cc6?w=500&h=700&fit=crop&q=80')"></div>
+        <div class="photo-card-overlay"></div>
+        <div class="photo-card-content">
+          <div class="photo-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M2 12c3-4 7-6 10-6s7 2 10 6c-3 4-7 6-10 6s-7-2-10-6z"/><path d="M7 12c1-1.5 3-2.5 5-2.5s4 1 5 2.5c-1 1.5-3 2.5-5 2.5s-4-1-5-2.5z"/><circle cx="12" cy="12" r="1"/><path d="M22 12l-2-1.5M22 12l-2 1.5"/></svg>
+          </div>
+          <div class="photo-card-name">Poisson</div>
+          <div class="photo-card-sub">Filet frais</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ACCOMPANIMENTS ═══ -->
+<div class="screen" id="screen-accomp">
+  <div class="screen-inner">
+    <div class="step-label">— Étape 2 —</div>
+    <h2 class="title">Vos <span class="accent">accompagnements</span></h2>
+    <p class="subtitle">Composez votre assiette.</p>
+    <div class="section-label">Féculents</div>
+    <div class="choices-row">
+      <div class="choice-card" data-type="starch" data-value="frites" onclick="toggleAccomp(this)">
+        <span class="check-badge"></span><span class="card-emoji">🍟</span><span class="card-label">Frites</span>
+      </div>
+      <div class="choice-card" data-type="starch" data-value="pdt" onclick="toggleAccomp(this)">
+        <span class="check-badge"></span><span class="card-emoji">🥔</span><span class="card-label">Pommes de terre</span>
+      </div>
+    </div>
+    <div class="section-label">Accompagnement</div>
+    <div class="choices-row">
+      <div class="choice-card" data-type="side" data-value="legumes" onclick="toggleAccomp(this)">
+        <span class="check-badge"></span><span class="card-emoji">🥬</span><span class="card-label">Légumes verts</span>
+      </div>
+      <div class="choice-card" data-type="side" data-value="pates" onclick="toggleAccomp(this)">
+        <span class="check-badge"></span><span class="card-emoji">🍝</span><span class="card-label">Pâtes</span>
+      </div>
+    </div>
+    <div class="input-wrap">
+      <span class="input-icon">✍</span>
+      <input type="text" class="free-input" id="freeText" placeholder="Ou écrivez ce que vous voulez...">
+    </div>
+    <button class="btn-primary" onclick="validateAccomp()" style="margin-top:1rem;">C'est parti, Chef !</button>
+  </div>
+</div>
+
+<!-- ═══ CHEF COOKING — PHOTO-REALISTIC ═══ -->
+<div class="screen screen-dark" id="screen-cooking">
+  <div class="screen-inner">
+    <div class="step-label">— Le Chef prépare —</div>
+    <h2 class="title" style="margin-bottom:1rem;">Votre assiette <span class="accent">se compose</span></h2>
+
+    <div class="cooking-theater" id="cookingTheater">
+      <!-- Scene 1: Préparation — Real photo of chef hands cutting -->
+      <div class="chef-scene" id="scene-0">
+        <div class="scene-photo" style="background-image:url('https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=900&h=760&fit=crop&q=80')"></div>
+        <div class="scene-gradient"></div>
+        <div class="scene-label">
+          <div class="scene-step">1 / 5</div>
+          <div class="scene-title">Préparation</div>
+        </div>
+      </div>
+
+      <!-- Scene 2: Assaisonnement — Real photo of seasoning -->
+      <div class="chef-scene" id="scene-1">
+        <div class="scene-photo" style="background-image:url('https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=900&h=760&fit=crop&q=80')"></div>
+        <div class="scene-gradient"></div>
+        <div class="scene-label">
+          <div class="scene-step">2 / 5</div>
+          <div class="scene-title">Assaisonnement</div>
+        </div>
+      </div>
+
+      <!-- Scene 3: Cuisson — Real photo of pan cooking -->
+      <div class="chef-scene" id="scene-2">
+        <div class="scene-photo" style="background-image:url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900&h=760&fit=crop&q=80')"></div>
+        <div class="scene-gradient"></div>
+        <div class="scene-label">
+          <div class="scene-step">3 / 5</div>
+          <div class="scene-title">Cuisson parfaite</div>
+        </div>
+      </div>
+
+      <!-- Scene 4: L'Harmonie Secrète — REAL LFDS JAR HERO -->
+      <div class="chef-scene scene-sauce" id="scene-3">
+        <div class="sauce-glow"></div>
+        <div class="sauce-hero">
+          <img src="https://l-fds.com/cdn/shop/files/92D989F1-3F39-4DBA-B1B2-5671BB8FCCA2.png?v=1769201672" alt="Harmonie Secrète" class="sauce-jar-hero">
+        </div>
+        <!-- Sparkle particles around jar -->
+        <div class="sauce-sparkle" style="top:25%;left:28%;animation-delay:0s"></div>
+        <div class="sauce-sparkle" style="top:20%;left:65%;animation-delay:0.5s"></div>
+        <div class="sauce-sparkle" style="top:40%;left:22%;animation-delay:1s"></div>
+        <div class="sauce-sparkle" style="top:35%;left:72%;animation-delay:1.5s"></div>
+        <div class="sauce-sparkle" style="top:55%;left:30%;animation-delay:0.3s"></div>
+        <div class="sauce-sparkle" style="top:50%;left:68%;animation-delay:0.8s"></div>
+        <div class="scene-gradient"></div>
+        <div class="scene-label">
+          <div class="scene-step">4 / 5</div>
+          <div class="scene-title">L'Harmonie Secrète ✨</div>
+        </div>
+      </div>
+
+      <!-- Scene 5: Dressage — Real photo of chef plating -->
+      <div class="chef-scene" id="scene-4">
+        <div class="scene-photo" style="background-image:url('https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=900&h=760&fit=crop&q=80')"></div>
+        <div class="scene-gradient"></div>
+        <div class="scene-label">
+          <div class="scene-step">5 / 5</div>
+          <div class="scene-title">Dressage</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cook-progress">
+      <div class="cook-progress-fill" id="cookProgress"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FINAL PLATE ═══ -->
+<div class="screen" id="screen-plate">
+  <div class="screen-inner" style="padding-top:60px;">
+    <div class="plate-scene" id="plateScene">
+      <div class="plate-3d" id="plate3d">
+        <div class="plate-base"></div>
+        <div class="plate-rim-outer"></div>
+        <div class="plate-rim-inner"></div>
+        <div class="plate-rim-gold"></div>
+        <div class="plate-drizzle" id="plateDrizzle"></div>
+        <div class="steam-group"><div class="steam-ln"></div><div class="steam-ln"></div><div class="steam-ln"></div></div>
+        <div id="plateItems"></div>
+        <img src="https://l-fds.com/cdn/shop/files/92D989F1-3F39-4DBA-B1B2-5671BB8FCCA2.png?v=1769201672" alt="Harmonie Secrète" class="plate-jar">
+      </div>
+    </div>
+    <div class="rotation-hint" id="rotHint"><span class="hint-icon">🔄</span> Glissez pour tourner l'assiette</div>
+    <div class="recipe-card" id="recipeCard"></div>
+    <button class="btn-secondary" onclick="restart()" style="margin-top:1rem;">↻ Recommencer</button>
+  </div>
+</div>
+
+<!-- ZOOM -->
+<div class="zoom-overlay" id="zoomOverlay">
+  <div class="zoom-close" onclick="closeZoom()">✕</div>
+  <div class="zoom-img-wrap" id="zoomImgWrap"><img id="zoomImg" src="" alt=""></div>
+  <div class="zoom-info"><div class="zoom-name" id="zoomName"></div><div class="zoom-desc" id="zoomDesc"></div></div>
+  <div class="zoom-tip">Appuyez deux fois pour zoomer</div>
+</div>
+
+<div class="app-footer">La Française des Sauces · Une cuillerée suffit</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════ */
+/*  LE CHEF IA — V7 — PHOTO-REALISTIC ENGINE                 */
+/* ═══════════════════════════════════════════════════════════ */
+
+const FOOD={
+  viande:{img:'https://images.unsplash.com/photo-1546964124-0cce460f38ef?w=600&h=600&fit=crop&q=85',emoji:'🥩',name:'Viande',desc:'Pièce de viande grillée à la perfection'},
+  poisson:{img:'https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=600&h=600&fit=crop&q=85',emoji:'🐟',name:'Poisson',desc:'Filet de poisson frais et fondant'},
+  frites:{img:'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=600&h=600&fit=crop&q=85',emoji:'🍟',name:'Frites croustillantes',desc:'Frites dorées et croustillantes'},
+  pdt:{img:'https://images.unsplash.com/photo-1508313880080-c4bef0730395?w=600&h=600&fit=crop&q=85',emoji:'🥔',name:'Pommes de terre',desc:'Pommes de terre fondantes'},
+  legumes:{img:'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=600&h=600&fit=crop&q=85',emoji:'🥬',name:'Légumes verts',desc:'Légumes verts croquants et savoureux'},
+  pates:{img:'https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=600&h=600&fit=crop&q=85',emoji:'🍝',name:'Pâtes',desc:'Pâtes al dente nappées d\'huile d\'olive'}
+};
+
+// Cooking scene photos for preloading
+const SCENE_PHOTOS=[
+  'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=900&h=760&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=900&h=760&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900&h=760&fit=crop&q=80',
+  'https://l-fds.com/cdn/shop/files/92D989F1-3F39-4DBA-B1B2-5671BB8FCCA2.png?v=1769201672',
+  'https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=900&h=760&fit=crop&q=80'
+];
+
+let state={category:'',starch:'',side:'',freeText:''};
+
+// Preload all images
+function preloadImages(){
+  Object.values(FOOD).forEach(f=>{const i=new Image();i.src=f.img});
+  SCENE_PHOTOS.forEach(src=>{const i=new Image();i.src=src});
+}
+preloadImages();
+
+// Particles
+(function(){const c=document.getElementById('particles');if(!c)return;for(let i=0;i<20;i++){const p=document.createElement('div');p.className='particle';p.style.left=Math.random()*100+'%';p.style.animationDelay=Math.random()*8+'s';p.style.animationDuration=(6+Math.random()*6)+'s';p.style.width=p.style.height=(2+Math.random()*4)+'px';c.appendChild(p)}})();
+
+// ═══ JAR 3D CYLINDER ═══
+(function initJar3D(){
+  const wrap=document.getElementById('jar3dWrap');
+  const cyl=document.getElementById('jar3dCyl');
+  const shadow=document.getElementById('jar3dShadow');
+  const hint=document.getElementById('jarHint');
+  if(!wrap||!cyl)return;
+
+  // Build cylinder panels — 24 panels for smooth surface
+  const N=24;
+  const angleStep=360/N;
+  const radius=56;
+  const panelW=2*Math.PI*radius/N+1; // +1px overlap to avoid gaps
+  const imgW=200; // jar image display width
+  const frontArc=210; // degrees of front arc showing the image
+
+  for(let i=0;i<N;i++){
+    const panel=document.createElement('div');
+    panel.className='jar-3d-panel';
+    const angle=i*angleStep;
+    // Normalize angle to -180..180
+    let theta=angle;if(theta>180)theta-=360;
+
+    panel.style.width=Math.ceil(panelW)+'px';
+    panel.style.marginLeft=-Math.ceil(panelW)/2+'px';
+    panel.style.transform='rotateY('+angle+'deg) translateZ('+radius+'px)';
+
+    const halfArc=frontArc/2; // 105°
+    if(Math.abs(theta)>halfArc){
+      // Back of jar — gradient matching jar body color
+      panel.style.backgroundImage='none';
+      panel.style.background='linear-gradient(180deg,#2a2520 0%,#1e1b16 30%,#15120e 60%,#0d0b08 100%)';
+    } else {
+      // Front arc — map image strip
+      const ratio=(theta+halfArc)/frontArc; // 0..1 across the arc
+      const imgX=ratio*imgW;
+      panel.style.backgroundPosition=-(imgX-panelW/2)+'px center';
+    }
+    cyl.appendChild(panel);
+  }
+
+  let ry=0,isDragging=false,lastX=0,velX=0,autoAnim=null,snapAnim=null;
+
+  function update(){
+    cyl.style.transform='rotateX(2deg) rotateY('+ry+'deg)';
+    if(shadow){
+      const sx=Math.sin(ry*Math.PI/180)*10;
+      shadow.style.transform='translateX(calc(-50% + '+sx+'px))';
+    }
+  }
+
+  // Auto-oscillation
+  let autoAngle=0;
+  function autoOscillate(){
+    if(isDragging)return;
+    autoAngle+=0.01;
+    ry=Math.sin(autoAngle)*30;
+    update();
+    autoAnim=requestAnimationFrame(autoOscillate);
+  }
+  autoAnim=requestAnimationFrame(autoOscillate);
+
+  // Drag
+  function onStart(x){
+    isDragging=true;lastX=x;velX=0;
+    cancelAnimationFrame(autoAnim);
+    cancelAnimationFrame(snapAnim);
+    wrap.style.cursor='grabbing';
+    if(hint)hint.classList.add('hidden');
+  }
+  function onMove(x){
+    if(!isDragging)return;
+    const dx=x-lastX;
+    ry+=dx*0.5;
+    velX=dx*0.5;
+    lastX=x;
+    update();
+  }
+  function onEnd(){
+    if(!isDragging)return;
+    isDragging=false;
+    wrap.style.cursor='grab';
+    function snapBack(){
+      if(Math.abs(velX)>0.3){
+        ry+=velX;velX*=0.9;
+        update();
+        snapAnim=requestAnimationFrame(snapBack);
+      }else{
+        function spring(){
+          const diff=-ry;
+          if(Math.abs(diff)<0.5){ry=0;update();autoAngle=0;autoAnim=requestAnimationFrame(autoOscillate);return;}
+          ry+=diff*0.08;
+          update();
+          snapAnim=requestAnimationFrame(spring);
+        }
+        spring();
+      }
+    }
+    snapBack();
+  }
+
+  wrap.addEventListener('mousedown',e=>{e.preventDefault();onStart(e.clientX)});
+  window.addEventListener('mousemove',e=>{if(isDragging)onMove(e.clientX)});
+  window.addEventListener('mouseup',onEnd);
+  wrap.addEventListener('touchstart',e=>{onStart(e.touches[0].clientX)},{passive:true});
+  window.addEventListener('touchmove',e=>{if(isDragging)onMove(e.touches[0].clientX)},{passive:true});
+  window.addEventListener('touchend',onEnd);
+})();
+
+// Navigation
+function goTo(id){
+  const prev=document.querySelector('.screen.active');
+  if(prev){prev.classList.remove('active');prev.classList.add('exit-up')}
+  setTimeout(()=>{
+    if(prev)prev.classList.remove('exit-up');
+    document.getElementById('screen-'+id).classList.add('active');
+    const h=document.getElementById('appHeader');
+    if(id==='welcome')h.classList.remove('visible');else h.classList.add('visible');
+    if(navigator.vibrate)navigator.vibrate(15);
+  },350);
+}
+
+function selectCategory(cat){
+  state.category=cat;
+  document.querySelectorAll('#screen-category .photo-card').forEach((c,i)=>{
+    c.classList.toggle('selected',(i===0&&cat==='viande')||(i===1&&cat==='poisson'));
+  });
+  if(navigator.vibrate)navigator.vibrate(10);
+  setTimeout(()=>goTo('accomp'),400);
+}
+
+function toggleAccomp(el){
+  const type=el.dataset.type,val=el.dataset.value;
+  document.querySelectorAll(`#screen-accomp .choice-card[data-type="${type}"]`).forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  state[type]=val;
+  if(navigator.vibrate)navigator.vibrate(10);
+}
+
+function validateAccomp(){
+  state.freeText=document.getElementById('freeText').value.trim();
+  if(!state.starch&&!state.side&&!state.freeText)return;
+  goTo('cooking');
+  setTimeout(()=>startCooking(),600);
+}
+
+// ═══ CHEF COOKING SEQUENCE — PHOTO-BASED ═══
+function startCooking(){
+  const scenes=document.querySelectorAll('.chef-scene');
+  const progress=document.getElementById('cookProgress');
+  let step=0;
+  const STEP_DURATION=2500;  // 2.5s per photo scene
+  const SAUCE_DURATION=3500; // Sauce hero gets extra time
+
+  function showScene(){
+    if(step>=scenes.length){
+      goTo('plate');
+      buildPlate();
+      return;
+    }
+    // Deactivate all
+    scenes.forEach(s=>{s.classList.remove('active');s.classList.add('exit')});
+    setTimeout(()=>{
+      scenes.forEach(s=>s.classList.remove('exit'));
+      scenes[step].classList.add('active');
+      progress.style.width=((step+1)/scenes.length*100)+'%';
+      if(navigator.vibrate)navigator.vibrate(8);
+    },250);
+
+    const dur=step===3?SAUCE_DURATION:STEP_DURATION;
+    step++;
+    setTimeout(showScene,dur);
+  }
+  showScene();
+}
+
+// ═══ BUILD FINAL PLATE ═══
+function buildPlate(){
+  const items=document.getElementById('plateItems');
+  items.innerHTML='';
+  const foods=[];
+  if(state.category)foods.push({key:state.category,pos:'food-protein'});
+  if(state.starch)foods.push({key:state.starch,pos:'food-starch'});
+  if(state.side)foods.push({key:state.side,pos:'food-side'});
+
+  foods.forEach((f,i)=>{
+    const data=FOOD[f.key];
+    const div=document.createElement('div');
+    div.className='plate-food '+f.pos;
+    div.onclick=()=>openZoom(data);
+    const img=document.createElement('img');
+    img.src=data.img;img.alt=data.name;img.loading='eager';
+    img.onerror=function(){this.parentElement.innerHTML='<div class="emoji-fb">'+data.emoji+'</div>'};
+    div.appendChild(img);items.appendChild(div);
+    setTimeout(()=>div.classList.add('show'),300+i*250);
+  });
+
+  if(state.freeText){
+    const div=document.createElement('div');
+    div.className='plate-food food-extra';
+    div.innerHTML='<div class="emoji-fb" style="font-size:1.4rem">✨</div>';
+    items.appendChild(div);
+    setTimeout(()=>div.classList.add('show'),300+foods.length*250);
+  }
+
+  buildRecipeCard();
+  setTimeout(()=>initPlateRotation(),500);
+}
+
+function buildRecipeCard(){
+  const card=document.getElementById('recipeCard');
+  let name=state.category==='viande'?'Viande Dorée':'Poisson du Jour';
+  const parts=[];
+  if(state.starch)parts.push(FOOD[state.starch].name);
+  if(state.side)parts.push(FOOD[state.side].name);
+  if(state.freeText)parts.push(state.freeText);
+  if(parts.length)name+=' & '+parts.join(', ');
+
+  const ings=[];
+  if(state.category)ings.push({e:FOOD[state.category].emoji,n:FOOD[state.category].name});
+  if(state.starch)ings.push({e:FOOD[state.starch].emoji,n:FOOD[state.starch].name});
+  if(state.side)ings.push({e:FOOD[state.side].emoji,n:FOOD[state.side].name});
+  if(state.freeText)ings.push({e:'✨',n:state.freeText});
+  ings.push({e:'🧈',n:'Harmonie Secrète'});
+
+  card.innerHTML=`
+    <div class="recipe-name">${name}</div>
+    <div class="recipe-tagline">Sublimé par l'Harmonie Secrète</div>
+    <div class="recipe-divider"></div>
+    <ul class="recipe-ingredients">${ings.map(i=>`<li><span class="ing-emoji">${i.e}</span>${i.n}</li>`).join('')}</ul>
+    <div class="recipe-tip">💡 Ajoutez une cuillerée d'Harmonie Secrète en fin de cuisson — elle sublime chaque saveur sans jamais masquer le produit.</div>
+  `;
+  setTimeout(()=>card.classList.add('visible'),600);
+}
+
+// ═══ 3D PLATE ROTATION ═══
+function initPlateRotation(){
+  const scene=document.getElementById('plateScene');
+  const plate=document.getElementById('plate3d');
+  const hint=document.getElementById('rotHint');
+  let rx=55,ry=0,isDragging=false,lastX=0,lastY=0,velX=0,velY=0,animFrame;
+
+  function update(){plate.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`}
+  function onStart(x,y){isDragging=true;lastX=x;lastY=y;velX=0;velY=0;cancelAnimationFrame(animFrame);scene.style.cursor='grabbing';hint.classList.add('hidden')}
+  function onMove(x,y){if(!isDragging)return;const dx=x-lastX,dy=y-lastY;ry+=dx*0.5;rx-=dy*0.3;rx=Math.max(15,Math.min(75,rx));velX=dx*0.5;velY=-dy*0.3;lastX=x;lastY=y;update()}
+  function onEnd(){isDragging=false;scene.style.cursor='grab';function inertia(){if(Math.abs(velX)<0.1&&Math.abs(velY)<0.1)return;ry+=velX;rx+=velY;rx=Math.max(15,Math.min(75,rx));velX*=0.92;velY*=0.92;update();animFrame=requestAnimationFrame(inertia)}inertia()}
+
+  scene.addEventListener('mousedown',e=>{e.preventDefault();onStart(e.clientX,e.clientY)});
+  window.addEventListener('mousemove',e=>onMove(e.clientX,e.clientY));
+  window.addEventListener('mouseup',onEnd);
+  scene.addEventListener('touchstart',e=>{const t=e.touches[0];onStart(t.clientX,t.clientY)},{passive:true});
+  window.addEventListener('touchmove',e=>{const t=e.touches[0];onMove(t.clientX,t.clientY)},{passive:true});
+  window.addEventListener('touchend',onEnd);
+  update();
+}
+
+// ═══ ZOOM ═══
+function openZoom(data){
+  document.getElementById('zoomName').textContent=data.name;
+  document.getElementById('zoomDesc').textContent=data.desc;
+  document.getElementById('zoomImg').src=data.img.replace('w=600&h=600','w=900&h=900');
+  document.getElementById('zoomImgWrap').classList.remove('zoomed');
+  document.getElementById('zoomOverlay').classList.add('active');
+  if(navigator.vibrate)navigator.vibrate(10);
+}
+function closeZoom(){document.getElementById('zoomOverlay').classList.remove('active')}
+document.getElementById('zoomImgWrap').addEventListener('dblclick',function(){this.classList.toggle('zoomed')});
+document.getElementById('zoomOverlay').addEventListener('click',function(e){if(e.target===this)closeZoom()});
+
+function restart(){
+  state={category:'',starch:'',side:'',freeText:''};
+  document.querySelectorAll('.choice-card.selected').forEach(c=>c.classList.remove('selected'));
+  document.getElementById('freeText').value='';
+  document.getElementById('recipeCard').classList.remove('visible');
+  document.getElementById('recipeCard').innerHTML='';
+  document.getElementById('plateItems').innerHTML='';
+  document.querySelectorAll('.chef-scene').forEach(s=>{s.classList.remove('active','exit')});
+  document.getElementById('cookProgress').style.width='0%';
+  goTo('welcome');
+}
+</script>
+</body>
+</html>

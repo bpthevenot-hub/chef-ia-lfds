@@ -1,0 +1,39 @@
+/* ═══ HEADER ═══ */
+
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  z-index: 100;
+  background: rgba(20, 18, 14, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(154, 125, 62, 0.08);
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: all 0.5s var(--ease-luxe);
+}
+
+.app-header--visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.header-logo {
+  height: 26px;
+  filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.3));
+}
+
+.header-tri {
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--navy) 33%, var(--white) 33% 66%, var(--red) 66%);
+  border-radius: 2px;
+  opacity: 0.7;
+}

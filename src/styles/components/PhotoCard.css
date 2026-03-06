@@ -1,0 +1,114 @@
+/* ═══ PHOTO CARD ═══ */
+
+.photo-card {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  height: clamp(180px, 35vh, 280px);
+  -webkit-user-select: none;
+  user-select: none;
+  transition: all 0.4s var(--ease);
+  box-shadow: var(--shadow-md);
+  border: 2px solid transparent;
+}
+
+.photo-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.photo-card:active {
+  transform: scale(0.97);
+}
+
+.photo-card--selected {
+  border-color: var(--gold);
+  box-shadow: var(--shadow-gold);
+}
+
+.photo-card--selected .check-badge {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Background photo */
+.photo-card__bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.6s var(--ease);
+}
+
+.photo-card:hover .photo-card__bg {
+  transform: scale(1.06);
+}
+
+/* Gradient overlay */
+.photo-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10, 8, 5, 0.85) 0%,
+    rgba(10, 8, 5, 0.3) 45%,
+    rgba(10, 8, 5, 0.08) 100%
+  );
+}
+
+/* Content */
+.photo-card__content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.4rem 1rem;
+  text-align: center;
+  z-index: 2;
+}
+
+/* Icon circle */
+.photo-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(212, 187, 120, 0.5);
+  background: rgba(154, 125, 62, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.7rem;
+}
+
+.photo-card__icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--gold-pale);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Name */
+.photo-card__name {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: #f0ebe0;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.2rem;
+}
+
+/* Subtitle */
+.photo-card__sub {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: rgba(240, 235, 224, 0.5);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}

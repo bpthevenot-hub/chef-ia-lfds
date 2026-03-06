@@ -1,0 +1,78 @@
+/* ═══ WELCOME SCREEN ═══ */
+
+.welcome {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  position: relative;
+}
+
+/* Particles */
+.particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  bottom: -10px;
+  background: radial-gradient(circle, var(--gold-pale) 0%, transparent 70%);
+  border-radius: 50%;
+  opacity: 0;
+  animation: particleRise linear infinite;
+}
+
+/* Logo */
+.welcome-logo {
+  width: clamp(220px, 55vw, 320px);
+  margin: 0 auto 0.6rem;
+  filter: drop-shadow(0 2px 15px rgba(0, 0, 0, 0.5));
+  animation: fadeInDown 1s var(--ease-luxe) 0.2s both;
+}
+
+/* Tricolor */
+.welcome-tri {
+  width: 60px;
+  height: 3px;
+  margin: 0 auto 1.2rem;
+  background: linear-gradient(90deg, var(--navy) 33%, #fff 33% 66%, var(--red) 66%);
+  border-radius: 2px;
+  animation: fadeIn 0.8s var(--ease) 0.5s both;
+}
+
+/* Title */
+.welcome-title {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 6vw, 2.8rem);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 1s var(--ease-luxe) 0.7s both;
+}
+
+/* CTA */
+.welcome-cta {
+  margin-bottom: 2rem;
+  animation: fadeInUp 1s var(--ease-luxe) 1s both;
+}
+
+/* Jar hint */
+.jar-hint {
+  font-size: 0.72rem;
+  color: rgba(240, 235, 224, 0.3);
+  letter-spacing: 1px;
+  margin-top: 0.5rem;
+  animation: fadeIn 1s var(--ease) 2.5s both;
+  transition: opacity 0.5s;
+}
+
+.jar-hint.hidden {
+  opacity: 0;
+}
