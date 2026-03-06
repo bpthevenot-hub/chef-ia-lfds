@@ -1,187 +1,228 @@
-/* ═══ COOKING THEATER ═══ */
+/* ═══ COOKING THEATER — Premium Loading Experience ═══ */
 
-.cooking-theater {
+.ct-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - var(--header-h) - 80px);
   position: relative;
-  width: 100%;
-  height: clamp(280px, 55vh, 450px);
-  border-radius: var(--radius);
-  overflow: hidden;
-  background: var(--bg-dark-2);
-  box-shadow: var(--shadow-lg);
-}
-
-/* Chef scene */
-.chef-scene {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transform: scale(1.05);
-  transition: all 0.8s var(--ease-luxe);
   overflow: hidden;
 }
 
-.chef-scene--active {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.chef-scene--exit {
-  opacity: 0;
-  transform: scale(0.95);
-}
-
-/* Scene photo */
-.scene-photo {
+/* ─── Ambient glow ─── */
+.ct-ambient {
   position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  animation: kenBurns 6s ease-in-out alternate infinite;
-}
-
-/* Scene gradient overlay */
-.scene-gradient {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    rgba(17, 17, 17, 0.75) 0%,
-    rgba(17, 17, 17, 0.2) 40%,
-    transparent 100%
-  );
-}
-
-/* Scene label */
-.scene-label {
-  position: absolute;
-  bottom: 1.5rem;
-  left: 1.5rem;
-  z-index: 3;
-}
-
-.scene-step {
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: rgba(240, 237, 232, 0.5);
-  margin-bottom: 4px;
-}
-
-.scene-title {
-  font-family: var(--serif);
-  font-size: 1.6rem;
-  font-weight: 400;
-  color: var(--text-light);
-}
-
-/* ─── Sauce hero scene ─── */
-.chef-scene--sauce {
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
   background: radial-gradient(
-    circle at 50% 45%,
-    rgba(200, 168, 80, 0.12) 0%,
-    rgba(200, 168, 80, 0.03) 35%,
-    var(--bg-dark) 65%
+    circle,
+    rgba(200, 168, 80, 0.08) 0%,
+    rgba(200, 168, 80, 0.02) 50%,
+    transparent 70%
   );
+  animation: ctBreathe 4s ease-in-out infinite;
+  pointer-events: none;
 }
 
-.sauce-glow {
+/* ─── Floating particles ─── */
+.ct-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  opacity: 0;
+  animation: ctParticleFloat 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ─── Central composition ─── */
+.ct-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  z-index: 2;
+  animation: fadeInUp 0.8s var(--ease-luxe) both;
+}
+
+/* ─── Circular timer ring ─── */
+.ct-ring-wrap {
+  position: relative;
+  width: 220px;
+  height: 220px;
+}
+
+.ct-ring {
+  width: 100%;
+  height: 100%;
+}
+
+.ct-ring-progress {
+  transition: stroke-dashoffset 0.3s ease;
+}
+
+/* ─── Illustration container (inside the ring) ─── */
+.ct-illustration-wrap {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -55%);
-  width: 280px;
-  height: 280px;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: ctFloat 4s ease-in-out infinite;
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease-luxe);
+}
+
+.ct-illustration-wrap--sauce {
+  animation: ctJarReveal 0.8s var(--ease-luxe) both, ctFloat 4s ease-in-out 0.8s infinite;
+}
+
+/* SVG illustration */
+.ct-illustration {
+  width: 100%;
+  height: 100%;
+  color: rgba(240, 237, 232, 0.7);
+}
+
+/* Jar image (sauce phase) */
+.ct-jar {
+  width: 90px;
+  filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.5));
+  animation: fadeIn 0.6s var(--ease) both;
+}
+
+/* ─── Message ─── */
+.ct-message {
+  text-align: center;
+  animation: ctMessageIn 0.6s var(--ease-luxe) both;
+}
+
+.ct-message-text {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(240, 237, 232, 0.7);
+  letter-spacing: 0.3px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ─── Step dots ─── */
+.ct-steps {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.ct-dot {
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(200, 168, 80, 0.15) 0%,
-    rgba(200, 168, 80, 0.05) 50%,
-    transparent 70%
-  );
-  animation: pulseSubtle 3s infinite;
+  background: rgba(255, 255, 255, 0.12);
+  transition: all 0.5s var(--ease);
 }
 
-.sauce-glow--outer {
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(
-    circle,
-    rgba(200, 168, 80, 0.05) 0%,
-    transparent 60%
-  );
-  animation: pulseSubtle 4s 0.5s infinite;
+.ct-dot--active {
+  background: rgba(255, 255, 255, 0.5);
+  width: 8px;
+  height: 8px;
 }
 
-.sauce-hero {
+/* ─── Brand footer ─── */
+.ct-brand {
   position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -55%);
-  z-index: 2;
-}
-
-.sauce-jar-hero {
-  width: 160px;
-  filter: drop-shadow(0 10px 40px rgba(0, 0, 0, 0.6));
-  animation: float 3s ease-in-out infinite;
-}
-
-/* Floating particles (warm, subtle) */
-.sauce-particle {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  opacity: 0;
-  animation: particleRise 3s ease-out infinite;
-  z-index: 1;
-}
-
-/* Sauce hero brand label */
-.sauce-hero-label {
-  position: absolute;
-  bottom: 28%;
+  bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
-  text-align: center;
-  z-index: 3;
-  animation: fadeInUp 0.8s var(--ease-luxe) 0.5s both;
+  z-index: 2;
+  animation: fadeIn 1s var(--ease) 0.5s both;
 }
 
-.sauce-hero-name {
-  display: block;
-  font-family: var(--serif);
-  font-size: 1.2rem;
+.ct-brand-name {
+  font-family: var(--sans);
+  font-size: 0.65rem;
   font-weight: 500;
-  color: rgba(240, 237, 232, 0.8);
-  letter-spacing: 1px;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-}
-
-.sauce-hero-sub {
-  display: block;
-  font-size: 0.68rem;
-  color: rgba(240, 237, 232, 0.4);
-  letter-spacing: 1.5px;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
-  margin-top: 4px;
+  color: rgba(240, 237, 232, 0.2);
 }
 
-/* ─── Progress bar ─── */
-.cook-progress {
-  width: 100%;
-  height: 3px;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 2px;
-  margin-top: 1rem;
-  overflow: hidden;
+/* ═══ ANIMATIONS ═══ */
+
+@keyframes ctBreathe {
+  0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
 }
 
-.cook-progress__fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--white), rgba(240, 237, 232, 0.7));
-  border-radius: 2px;
-  transition: width 0.6s var(--ease);
+@keyframes ctFloat {
+  0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+  50% { transform: translate(-50%, -50%) translateY(-6px); }
+}
+
+@keyframes ctParticleFloat {
+  0% { opacity: 0; transform: translateY(0) scale(0.5); }
+  30% { opacity: 0.3; transform: scale(1); }
+  70% { opacity: 0.15; }
+  100% { opacity: 0; transform: translateY(-80px) scale(0.3); }
+}
+
+@keyframes ctMessageIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ctJarReveal {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* ─── Mobile ─── */
+@media (max-width: 768px) {
+  .ct-ring-wrap {
+    width: 180px;
+    height: 180px;
+  }
+
+  .ct-illustration-wrap {
+    width: 100px;
+    height: 100px;
+  }
+
+  .ct-message-text {
+    font-size: 1.1rem;
+    padding: 0 1rem;
+  }
+
+  .ct-jar {
+    width: 75px;
+  }
+
+  .ct-ambient {
+    width: 260px;
+    height: 260px;
+  }
+}
+
+@media (max-width: 380px) {
+  .ct-ring-wrap {
+    width: 150px;
+    height: 150px;
+  }
+
+  .ct-illustration-wrap {
+    width: 85px;
+    height: 85px;
+  }
+
+  .ct-message-text {
+    font-size: 1rem;
+  }
 }

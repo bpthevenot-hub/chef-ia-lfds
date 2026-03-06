@@ -9,7 +9,6 @@ import PlatingStyle from './components/PlatingStyle';
 import CookingTheater from './components/CookingTheater';
 import FinalPlate from './components/FinalPlate';
 import { CATEGORIES, STARCHES, SIDES } from './data/foods';
-import { COOKING_SCENES } from './data/scenes';
 import { preloadImages } from './utils/preload';
 import './styles/components/App.css';
 
@@ -33,7 +32,6 @@ export default function App() {
       ...CATEGORIES.map((c) => c.plateImg),
       ...STARCHES.map((s) => s.photo),
       ...SIDES.map((s) => s.photo),
-      ...COOKING_SCENES.filter((s) => s.photo).map((s) => s.photo),
     ];
     preloadImages(urls);
   }, []);
@@ -118,6 +116,7 @@ export default function App() {
         <Screen id="cooking" current={screen} prev={prevScreen}>
           <CookingTheater
             active={screen === 'cooking'}
+            category={state.category}
             onComplete={() => goTo('plate')}
           />
         </Screen>
