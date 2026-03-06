@@ -1,9 +1,13 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { CATEGORIES, STARCHES, SIDES, JAR_URL, PRODUCT_URL } from '../data/foods';
+import { CATEGORIES, STARCHES, SIDES, COOKING_LEVELS, PLATING_STYLES, SAUCE_LEVELS, JAR_URL, PRODUCT_URL } from '../data/foods';
+import ShareButton from './ShareButton';
 import '../styles/components/FinalPlate.css';
 
 const ALL_FOODS = [...CATEGORIES, ...STARCHES, ...SIDES];
 const findFood = (id) => ALL_FOODS.find((f) => f.id === id);
+const findLevel = (id) => COOKING_LEVELS.find((l) => l.id === id);
+const findStyle = (id) => PLATING_STYLES.find((s) => s.id === id);
+const findSauce = (id) => SAUCE_LEVELS.find((s) => s.id === id);
 
 export default function FinalPlate({ state, onRestart }) {
   const sceneRef = useRef(null);
@@ -33,6 +37,11 @@ export default function FinalPlate({ state, onRestart }) {
   if (state.side) { const f = findFood(state.side); if (f) parts.push(f.name); }
   if (state.freeText) parts.push(state.freeText);
   const recipeName = parts.length ? `${mainName} & ${parts.join(', ')}` : mainName;
+
+  // Details (cooking level, plating, sauce)
+  const cookingLevel = state.cookingLevel ? findLevel(state.cookingLevel) : null;
+  const platingStyle = state.platingStyle ? findStyle(state.platingStyle) : null;
+  const sauceLevel = state.sauceLevel ? findSauce(state.sauceLevel) : null;
 
   // Ingredients list
   const ingredients = foods.map((f) => ({ emoji: f.emoji, name: f.name }));
@@ -160,6 +169,34 @@ export default function FinalPlate({ state, onRestart }) {
         <div className="recipe-name">{recipeName}</div>
         <div className="recipe-tagline">Sublimé par l'Harmonie Secrète</div>
         <div className="recipe-divider" />
+
+        {/* Details: cuisson, dressage, sauce */}
+        {(cookingLevel || platingStyle || sauceLevel) && (
+          <div className="recipe-details">
+            {cookingLevel && (
+              <div className="recipe-detail">
+                <span className="detail-dot" style={{ background: cookingLevel.color }} />
+                <span className="detail-label">Cuisson</span>
+                <span className="detail-value">{cookingLevel.name}</span>
+              </div>
+            )}
+            {sauceLevel && (
+              <div className="recipe-detail">
+                <span className="detail-emoji">{sauceLevel.emoji}</span>
+                <span className="detail-label">Sauce</span>
+                <span className="detail-value">{sauceLevel.name}</span>
+              </div>
+            )}
+            {platingStyle && (
+              <div className="recipe-detail">
+                <span className="detail-emoji">{platingStyle.emoji}</span>
+                <span className="detail-label">Dressage</span>
+                <span className="detail-value">{platingStyle.name}</span>
+              </div>
+            )}
+          </div>
+        )}
+
         <ul className="recipe-ingredients">
           {ingredients.map((ing, i) => (
             <li key={i}>
@@ -173,11 +210,12 @@ export default function FinalPlate({ state, onRestart }) {
         </div>
       </div>
 
-      {/* CTA + Restart */}
+      {/* CTA + Share + Restart */}
       <div className="plate-actions">
         <a href={`https://l-fds.com${PRODUCT_URL}`} className="btn-primary cta-buy" target="_blank" rel="noopener">
           Commander la sauce
         </a>
+        <ShareButton recipeName={recipeName} />
         <button className="btn-secondary" onClick={onRestart}>
           ↻ Recommencer
         </button>

@@ -1,0 +1,118 @@
+/* ═══ PLATING STYLE ═══ */
+
+.plating-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin: 1.2rem 0;
+}
+
+.plating-option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1.5px solid rgba(154, 125, 62, 0.12);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.4s var(--ease);
+  text-align: left;
+  color: var(--text-light);
+  overflow: hidden;
+}
+
+.plating-option::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(154, 125, 62, 0.05) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
+}
+
+.plating-option:hover {
+  border-color: rgba(154, 125, 62, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+}
+
+.plating-option:hover::before {
+  opacity: 1;
+}
+
+.plating-option--selected {
+  border-color: var(--gold);
+  background: rgba(154, 125, 62, 0.08);
+  box-shadow: 0 8px 30px rgba(154, 125, 62, 0.2);
+}
+
+.plating-option--selected::before {
+  opacity: 1;
+}
+
+.plating-option__emoji {
+  font-size: 2rem;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(154, 125, 62, 0.08);
+  border-radius: var(--radius-xs);
+  border: 1px solid rgba(154, 125, 62, 0.15);
+}
+
+.plating-option__info {
+  flex: 1;
+}
+
+.plating-option__name {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.plating-option__sub {
+  font-size: 0.72rem;
+  color: var(--gold-pale);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.plating-option__desc {
+  position: absolute;
+  bottom: 6px;
+  right: 16px;
+  font-size: 0.68rem;
+  color: rgba(240, 235, 224, 0.3);
+  font-style: italic;
+}
+
+.plating-option__badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s var(--ease-spring);
+}
+
+.plating-option__badge span {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+}

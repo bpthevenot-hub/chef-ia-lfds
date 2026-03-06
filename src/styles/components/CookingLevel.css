@@ -1,0 +1,126 @@
+/* ═══ COOKING LEVEL ═══ */
+
+.cooking-levels {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 1.2rem 0;
+}
+
+.cooking-level {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1.5px solid rgba(154, 125, 62, 0.12);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.35s var(--ease);
+  position: relative;
+  text-align: left;
+  color: var(--text-light);
+}
+
+.cooking-level:hover {
+  background: rgba(154, 125, 62, 0.06);
+  border-color: rgba(154, 125, 62, 0.25);
+  transform: translateX(4px);
+}
+
+.cooking-level--selected {
+  border-color: var(--gold);
+  background: rgba(154, 125, 62, 0.1);
+  box-shadow: 0 4px 20px rgba(154, 125, 62, 0.2);
+}
+
+.cooking-level__indicator {
+  width: 8px;
+  height: 32px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  transition: all 0.3s var(--ease);
+}
+
+.cooking-level--selected .cooking-level__indicator {
+  width: 10px;
+  box-shadow: 0 0 12px currentColor;
+}
+
+.cooking-level__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cooking-level__name {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+.cooking-level__sub {
+  font-size: 0.72rem;
+  color: rgba(240, 235, 224, 0.45);
+  letter-spacing: 0.5px;
+}
+
+.cooking-level__emoji {
+  font-size: 1.3rem;
+}
+
+.cooking-level__check {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s var(--ease-spring);
+}
+
+/* ─── Meat cross-section visual ─── */
+.meat-preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.meat-cross-section {
+  width: 120px;
+  height: 80px;
+  border-radius: 50% / 40%;
+  overflow: hidden;
+  display: flex;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(154, 125, 62, 0.2);
+}
+
+.meat-section {
+  flex: 1;
+  background: var(--meat-color);
+  opacity: var(--meat-opacity);
+  transition: opacity 0.5s var(--ease), transform 0.3s var(--ease);
+}
+
+.meat-section--active {
+  transform: scaleX(1.3);
+  z-index: 1;
+}
+
+.meat-label {
+  font-family: var(--serif);
+  font-size: 0.9rem;
+  color: var(--gold-pale);
+  margin-top: 0.6rem;
+  font-style: italic;
+}

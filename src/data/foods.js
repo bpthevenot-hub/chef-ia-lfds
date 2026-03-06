@@ -101,6 +101,37 @@ export const SAUCE_LEVELS = [
   },
 ];
 
+export const COOKING_LEVELS = [
+  { id: 'rare', name: 'Saignant', sub: 'Bleu à cœur', emoji: '🔴', color: '#c0392b' },
+  { id: 'medium-rare', name: 'À point', sub: 'Rose et juteux', emoji: '🟠', color: '#e67e22' },
+  { id: 'medium', name: 'Cuit', sub: 'Tendre et doré', emoji: '🟡', color: '#f1c40f' },
+  { id: 'well-done', name: 'Bien cuit', sub: 'Caramélisé', emoji: '🟤', color: '#8b6914' },
+];
+
+export const PLATING_STYLES = [
+  {
+    id: 'brasserie',
+    name: 'Brasserie classique',
+    sub: 'La tradition française',
+    emoji: '🍽️',
+    desc: 'Généreux, convivial, authentique',
+  },
+  {
+    id: 'gourmet',
+    name: 'Gastronomique',
+    sub: 'Dressage Michelin',
+    emoji: '⭐',
+    desc: 'Précis, aérien, raffiné',
+  },
+  {
+    id: 'rustic',
+    name: 'Rustique français',
+    sub: 'Terroir & chaleur',
+    emoji: '🏡',
+    desc: 'Brut, généreux, campagne chic',
+  },
+];
+
 export const JAR_URL = 'https://l-fds.com/cdn/shop/files/92D989F1-3F39-4DBA-B1B2-5671BB8FCCA2.png?v=1769201672';
 export const LOGO_URL = 'https://l-fds.com/cdn/shop/files/84AAFEE7-23FA-4134-AA98-6196210200FC.png?v=1769643841';
 export const PRODUCT_URL = '/products/harmonie-secrete-aux-herbes-d-exceptions';

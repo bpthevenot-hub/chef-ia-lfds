@@ -2,8 +2,10 @@ import { useState, useCallback, useEffect } from 'react';
 import Header from './components/Header';
 import Welcome from './components/Welcome';
 import CategorySelect from './components/CategorySelect';
+import CookingLevel from './components/CookingLevel';
 import Accompaniments from './components/Accompaniments';
 import SauceQuantity from './components/SauceQuantity';
+import PlatingStyle from './components/PlatingStyle';
 import CookingTheater from './components/CookingTheater';
 import FinalPlate from './components/FinalPlate';
 import { CATEGORIES, STARCHES, SIDES } from './data/foods';
@@ -11,20 +13,20 @@ import { COOKING_SCENES } from './data/scenes';
 import { preloadImages } from './utils/preload';
 import './styles/components/App.css';
 
-const SCREENS = ['welcome', 'category', 'accomp', 'sauce', 'cooking', 'plate'];
-
 export default function App() {
   const [screen, setScreen] = useState('welcome');
   const [prevScreen, setPrevScreen] = useState(null);
   const [state, setState] = useState({
     category: '',
+    cookingLevel: '',
     starch: '',
     side: '',
     freeText: '',
     sauceLevel: 'classic',
+    platingStyle: '',
   });
 
-  // Preload all images on mount
+  // Preload images
   useEffect(() => {
     const urls = [
       ...CATEGORIES.map((c) => c.photo),
@@ -47,7 +49,10 @@ export default function App() {
   }, []);
 
   const restart = useCallback(() => {
-    setState({ category: '', starch: '', side: '', freeText: '', sauceLevel: 'classic' });
+    setState({
+      category: '', cookingLevel: '', starch: '', side: '',
+      freeText: '', sauceLevel: 'classic', platingStyle: '',
+    });
     goTo('welcome');
   }, [goTo]);
 
@@ -65,6 +70,18 @@ export default function App() {
             selected={state.category}
             onSelect={(cat) => {
               updateState({ category: cat });
+              // If viande → show cooking level, else skip to accomp
+              setTimeout(() => goTo(cat === 'viande' ? 'cuisson' : 'accomp'), 400);
+            }}
+          />
+        </Screen>
+
+        <Screen id="cuisson" current={screen} prev={prevScreen}>
+          <CookingLevel
+            selected={state.cookingLevel}
+            category={state.category}
+            onSelect={(level) => {
+              updateState({ cookingLevel: level });
               setTimeout(() => goTo('accomp'), 400);
             }}
           />
@@ -83,6 +100,16 @@ export default function App() {
             selected={state.sauceLevel}
             onSelect={(level) => {
               updateState({ sauceLevel: level });
+              setTimeout(() => goTo('plating'), 500);
+            }}
+          />
+        </Screen>
+
+        <Screen id="plating" current={screen} prev={prevScreen}>
+          <PlatingStyle
+            selected={state.platingStyle}
+            onSelect={(style) => {
+              updateState({ platingStyle: style });
               setTimeout(() => goTo('cooking'), 500);
             }}
           />
@@ -107,7 +134,6 @@ export default function App() {
   );
 }
 
-/** Screen wrapper with enter/exit transitions */
 function Screen({ id, current, prev, children }) {
   const isActive = current === id;
   const isExiting = prev === id && current !== id;

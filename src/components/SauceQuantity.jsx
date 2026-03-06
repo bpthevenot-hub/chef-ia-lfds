@@ -19,12 +19,29 @@ export default function SauceQuantity({ selected, onSelect }) {
       <div className="sauce-preview">
         <div className="sauce-jar-mini">
           <img src={JAR_URL} alt="Harmonie Secrète" />
+          {/* Glow behind jar */}
+          <div className="sauce-jar-glow" style={{ opacity: 0.3 + sauceAmount * 0.5 }} />
         </div>
         <div className="sauce-pour-visual">
           <div
             className="sauce-stream"
             style={{ height: `${sauceAmount * 80}px`, opacity: sauceAmount }}
           />
+          {/* Drip drops */}
+          {sauceAmount > 0.5 && (
+            <div className="sauce-drips">
+              {[...Array(Math.ceil(sauceAmount * 3))].map((_, i) => (
+                <div
+                  key={i}
+                  className="sauce-drip"
+                  style={{
+                    animationDelay: `${i * 0.4}s`,
+                    left: `${-4 + i * 4}px`,
+                  }}
+                />
+              ))}
+            </div>
+          )}
           <div
             className="sauce-pool"
             style={{

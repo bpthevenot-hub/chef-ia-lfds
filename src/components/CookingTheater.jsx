@@ -58,20 +58,40 @@ export default function CookingTheater({ active, onComplete }) {
             {scene.isSauce ? (
               <>
                 <div className="sauce-glow" />
+                <div className="sauce-glow sauce-glow--outer" />
                 <div className="sauce-hero">
                   <img src={JAR_URL} alt="Harmonie Secrète" className="sauce-jar-hero" />
                 </div>
-                {[...Array(6)].map((_, j) => (
+                {/* Sparkle ring */}
+                <div className="sauce-sparkle-ring">
+                  {[...Array(8)].map((_, j) => (
+                    <div
+                      key={j}
+                      className="sauce-sparkle"
+                      style={{
+                        animationDelay: `${j * 0.25}s`,
+                      }}
+                    />
+                  ))}
+                </div>
+                {/* Floating gold particles */}
+                {[...Array(12)].map((_, j) => (
                   <div
-                    key={j}
-                    className="sauce-sparkle"
+                    key={`p${j}`}
+                    className="sauce-particle"
                     style={{
-                      top: `${20 + Math.random() * 40}%`,
-                      left: `${25 + Math.random() * 50}%`,
-                      animationDelay: `${j * 0.3}s`,
+                      top: `${15 + Math.random() * 70}%`,
+                      left: `${10 + Math.random() * 80}%`,
+                      animationDelay: `${j * 0.2}s`,
+                      animationDuration: `${2 + Math.random() * 2}s`,
                     }}
                   />
                 ))}
+                {/* Sauce brand label */}
+                <div className="sauce-hero-label">
+                  <span className="sauce-hero-name">Harmonie Secrète</span>
+                  <span className="sauce-hero-sub">Beurre aux herbes fraîches</span>
+                </div>
               </>
             ) : (
               <div

@@ -78,9 +78,10 @@
 /* ─── Sauce hero scene ─── */
 .chef-scene--sauce {
   background: radial-gradient(
-    circle at 50% 50%,
-    rgba(154, 125, 62, 0.15) 0%,
-    var(--bg-dark) 60%
+    circle at 50% 45%,
+    rgba(154, 125, 62, 0.18) 0%,
+    rgba(154, 125, 62, 0.05) 35%,
+    var(--bg-dark) 65%
   );
 }
 
@@ -88,21 +89,33 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -55%);
   width: 280px;
   height: 280px;
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(154, 125, 62, 0.2) 0%,
+    rgba(154, 125, 62, 0.25) 0%,
+    rgba(184, 154, 80, 0.08) 50%,
     transparent 70%
   );
   animation: pulseGold 3s infinite;
 }
 
+.sauce-glow--outer {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(
+    circle,
+    rgba(154, 125, 62, 0.08) 0%,
+    transparent 60%
+  );
+  animation: pulseGold 4s 0.5s infinite;
+}
+
 .sauce-hero {
   position: absolute;
-  top: 50%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -55%);
   z-index: 2;
@@ -111,17 +124,80 @@
 .sauce-jar-hero {
   width: 160px;
   filter: drop-shadow(0 10px 40px rgba(0, 0, 0, 0.6));
-  animation: float 3s ease-in-out infinite;
+  animation: float 3s ease-in-out infinite, glowPulse 3s ease-in-out infinite;
+}
+
+/* Sparkle ring around jar */
+.sauce-sparkle-ring {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+  width: 240px;
+  height: 240px;
+  animation: rotateSparkle 12s linear infinite;
+  z-index: 1;
 }
 
 .sauce-sparkle {
   position: absolute;
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: var(--gold-pale);
   animation: sparkle 2s ease-in-out infinite;
+  box-shadow: 0 0 6px rgba(212, 187, 120, 0.6);
+}
+
+.sauce-sparkle-ring .sauce-sparkle:nth-child(1) { top: 0; left: 50%; }
+.sauce-sparkle-ring .sauce-sparkle:nth-child(2) { top: 15%; right: 15%; }
+.sauce-sparkle-ring .sauce-sparkle:nth-child(3) { top: 50%; right: 0; }
+.sauce-sparkle-ring .sauce-sparkle:nth-child(4) { bottom: 15%; right: 15%; }
+.sauce-sparkle-ring .sauce-sparkle:nth-child(5) { bottom: 0; left: 50%; }
+.sauce-sparkle-ring .sauce-sparkle:nth-child(6) { bottom: 15%; left: 15%; }
+.sauce-sparkle-ring .sauce-sparkle:nth-child(7) { top: 50%; left: 0; }
+.sauce-sparkle-ring .sauce-sparkle:nth-child(8) { top: 15%; left: 15%; }
+
+/* Floating gold particles */
+.sauce-particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--gold-light);
+  opacity: 0;
+  animation: particleRise 3s ease-out infinite;
   z-index: 1;
+}
+
+/* Sauce hero brand label */
+.sauce-hero-label {
+  position: absolute;
+  bottom: 28%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 3;
+  animation: fadeInUp 0.8s var(--ease-luxe) 0.5s both;
+}
+
+.sauce-hero-name {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--gold-pale);
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.sauce-hero-sub {
+  display: block;
+  font-size: 0.68rem;
+  color: rgba(212, 187, 120, 0.5);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-top: 4px;
 }
 
 /* ─── Progress bar ─── */
