@@ -22,11 +22,6 @@
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-@keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
-
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
@@ -34,13 +29,8 @@
 
 @keyframes particleRise {
   0% { opacity: 0; transform: translateY(0) scale(0); }
-  20% { opacity: 0.6; transform: scale(1); }
+  20% { opacity: 0.4; transform: scale(1); }
   100% { opacity: 0; transform: translateY(-100vh) scale(0.5); }
-}
-
-@keyframes sparkle {
-  0%, 100% { opacity: 0; transform: scale(0); }
-  50% { opacity: 1; transform: scale(1); }
 }
 
 @keyframes kenBurns {
@@ -60,11 +50,6 @@
   100% { clip-path: inset(0 0 0% 0); opacity: 1; }
 }
 
-@keyframes pulseGold {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(154, 125, 62, 0.4); }
-  50% { box-shadow: 0 0 20px 8px rgba(154, 125, 62, 0.15); }
-}
-
 @keyframes slideInRight {
   from { opacity: 0; transform: translateX(40px); }
   to { opacity: 1; transform: translateX(0); }
@@ -77,19 +62,12 @@
   100% { transform: translateY(60px) scaleY(1.3); opacity: 0; }
 }
 
-@keyframes glowPulse {
-  0%, 100% { filter: drop-shadow(0 0 8px rgba(154, 125, 62, 0.3)); }
-  50% { filter: drop-shadow(0 0 20px rgba(154, 125, 62, 0.6)); }
+@keyframes pulseSubtle {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
 }
 
 @keyframes rotateSparkle {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-@keyframes sauceWave {
-  0%, 100% { transform: scaleX(1) scaleY(1); }
-  25% { transform: scaleX(1.05) scaleY(0.95); }
-  50% { transform: scaleX(0.95) scaleY(1.05); }
-  75% { transform: scaleX(1.03) scaleY(0.97); }
+  0% { transform: translate(-50%, -55%) rotate(0deg); }
+  100% { transform: translate(-50%, -55%) rotate(360deg); }
 }

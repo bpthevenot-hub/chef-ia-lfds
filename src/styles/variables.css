@@ -1,50 +1,45 @@
 /* ═══════════════════════════════════════════════════════════ */
-/*  LE CHEF IA — DESIGN TOKENS                                */
+/*  LE CHEF IA — DESIGN TOKENS (LFDS Brand)                    */
 /* ═══════════════════════════════════════════════════════════ */
 
 :root {
   /* Backgrounds */
-  --bg-dark: #0a0908;
-  --bg-dark-2: #1a1714;
-  --bg-dark-3: #252118;
+  --bg-dark: #111111;
+  --bg-dark-2: #191919;
+  --bg-dark-3: #222222;
   --bg-warm: #f3f0e8;
-  --bg-warm-2: #e8e4d8;
   --white: #ffffff;
-  --cream: #ede8db;
-
-  /* Gold palette */
-  --gold: #9a7d3e;
-  --gold-light: #b89a50;
-  --gold-pale: #d4bb78;
-  --gold-rich: #7a6020;
-  --gold-glow: rgba(154, 125, 62, 0.18);
-  --gold-glow-strong: rgba(154, 125, 62, 0.35);
+  --cream: #f3f0e8;
 
   /* Text */
-  --text-light: #f0ebe0;
-  --text-dark: #151210;
-  --text-dark-2: #2d2820;
-  --text-muted: #6a6358;
+  --text-light: #f0ede8;
+  --text-dark: #1a1a1a;
+  --text-dark-2: #333333;
+  --text-muted: rgba(240, 237, 232, 0.4);
 
-  /* French tricolor */
+  /* French tricolor (brand accent) */
   --navy: #002395;
   --red: #ED2939;
+
+  /* Natural sauce color (butter sauce — food color, not decoration) */
+  --sauce: #c8a850;
+  --sauce-light: #dcc878;
+  --sauce-glow: rgba(200, 168, 80, 0.15);
 
   /* Typography */
   --serif: 'Cormorant Garamond', Georgia, serif;
   --sans: 'Inter', -apple-system, sans-serif;
 
   /* Spacing */
-  --radius: 20px;
-  --radius-sm: 14px;
-  --radius-xs: 10px;
+  --radius: 16px;
+  --radius-sm: 12px;
+  --radius-xs: 8px;
   --header-h: 52px;
 
   /* Shadows */
-  --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.07);
-  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.10);
-  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.14);
-  --shadow-gold: 0 8px 40px rgba(154, 125, 62, 0.35);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.25);
 
   /* Easings */
   --ease: cubic-bezier(0.4, 0, 0.2, 1);

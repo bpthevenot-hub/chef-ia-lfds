@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { CATEGORIES, STARCHES, SIDES, COOKING_LEVELS, PLATING_STYLES, SAUCE_LEVELS, JAR_URL, PRODUCT_URL } from '../data/foods';
+import { getPlateImage } from '../data/plateImages';
 import ShareButton from './ShareButton';
 import '../styles/components/FinalPlate.css';
 
@@ -10,27 +11,16 @@ const findStyle = (id) => PLATING_STYLES.find((s) => s.id === id);
 const findSauce = (id) => SAUCE_LEVELS.find((s) => s.id === id);
 
 export default function FinalPlate({ state, onRestart }) {
-  const sceneRef = useRef(null);
-  const plateRef = useRef(null);
+  const imageRef = useRef(null);
+  const containerRef = useRef(null);
   const [cardVisible, setCardVisible] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
-  // Build food items list
-  const foods = [];
-  if (state.category) {
-    const f = findFood(state.category);
-    if (f) foods.push({ ...f, pos: 'food-protein' });
-  }
-  if (state.starch) {
-    const f = findFood(state.starch);
-    if (f) foods.push({ ...f, pos: 'food-starch' });
-  }
-  if (state.side) {
-    const f = findFood(state.side);
-    if (f) foods.push({ ...f, pos: 'food-side' });
-  }
+  // Get the plate image based on user selections
+  const plateImageUrl = getPlateImage(state);
 
   // Recipe name
-  const mainName = state.category === 'viande' ? 'Viande Dorée' :
+  const mainName = state.category === 'viande' ? 'Viande du Chef' :
     state.category === 'poisson' ? 'Poisson du Jour' : 'Légumes du Marché';
   const parts = [];
   if (state.starch) { const f = findFood(state.starch); if (f) parts.push(f.name); }
@@ -38,139 +28,178 @@ export default function FinalPlate({ state, onRestart }) {
   if (state.freeText) parts.push(state.freeText);
   const recipeName = parts.length ? `${mainName} & ${parts.join(', ')}` : mainName;
 
-  // Details (cooking level, plating, sauce)
+  // Details
   const cookingLevel = state.cookingLevel ? findLevel(state.cookingLevel) : null;
   const platingStyle = state.platingStyle ? findStyle(state.platingStyle) : null;
   const sauceLevel = state.sauceLevel ? findSauce(state.sauceLevel) : null;
 
-  // Ingredients list
-  const ingredients = foods.map((f) => ({ emoji: f.emoji, name: f.name }));
+  // Ingredients
+  const ingredients = [];
+  if (state.category) { const f = findFood(state.category); if (f) ingredients.push({ emoji: f.emoji, name: f.name }); }
+  if (state.starch) { const f = findFood(state.starch); if (f) ingredients.push({ emoji: f.emoji, name: f.name }); }
+  if (state.side) { const f = findFood(state.side); if (f) ingredients.push({ emoji: f.emoji, name: f.name }); }
   if (state.freeText) ingredients.push({ emoji: '✨', name: state.freeText });
   ingredients.push({ emoji: '🧈', name: 'Harmonie Secrète' });
 
-  // 3D rotation
+  // Reset imageLoaded when the URL changes, then check if already cached
   useEffect(() => {
-    const scene = sceneRef.current;
-    const plate = plateRef.current;
-    if (!scene || !plate) return;
+    setImageLoaded(false);
+    // Use rAF to check after the img element updates its src
+    const raf = requestAnimationFrame(() => {
+      const img = imageRef.current;
+      if (img && img.complete && img.naturalWidth > 0) {
+        setImageLoaded(true);
+      }
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [plateImageUrl]);
 
-    let rx = 55, ry = 0, isDragging = false, lastX = 0, lastY = 0;
-    let velX = 0, velY = 0, animFrame;
+  // Perspective tilt effect
+  useEffect(() => {
+    const container = containerRef.current;
+    const image = imageRef.current;
+    if (!container || !image) return;
 
-    function update() {
-      plate.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+    let isDragging = false;
+    let lastX = 0, lastY = 0;
+    let currentRx = 0, currentRy = 0;
+    let velX = 0, velY = 0;
+    let animFrame;
+
+    function applyTransform() {
+      image.style.transform =
+        `perspective(800px) rotateX(${currentRx}deg) rotateY(${currentRy}deg) scale(1.02)`;
+      // Dynamic shadow based on tilt
+      const shadowX = -currentRy * 0.8;
+      const shadowY = currentRx * 0.8 + 12;
+      image.style.boxShadow =
+        `${shadowX}px ${shadowY}px 40px rgba(0, 0, 0, 0.3)`;
     }
 
-    function onStart(x, y) {
-      isDragging = true; lastX = x; lastY = y;
-      velX = 0; velY = 0;
+    function resetTransform() {
+      currentRx = 0;
+      currentRy = 0;
+      image.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale(1)';
+      image.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.3)';
+    }
+
+    // Mouse hover tilt (desktop)
+    function onMouseMove(e) {
+      if (isDragging) return;
+      const rect = container.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      currentRy = x * 12;
+      currentRx = -y * 8;
+      applyTransform();
+    }
+
+    function onMouseLeave() {
+      if (!isDragging) resetTransform();
+    }
+
+    // Touch drag tilt (mobile)
+    function onTouchStart(e) {
+      isDragging = true;
+      const t = e.touches[0];
+      lastX = t.clientX;
+      lastY = t.clientY;
+      velX = 0;
+      velY = 0;
       cancelAnimationFrame(animFrame);
-      scene.style.cursor = 'grabbing';
     }
-    function onMove(x, y) {
+
+    function onTouchMove(e) {
       if (!isDragging) return;
-      const dx = x - lastX, dy = y - lastY;
-      ry += dx * 0.5; rx -= dy * 0.3;
-      rx = Math.max(15, Math.min(75, rx));
-      velX = dx * 0.5; velY = -dy * 0.3;
-      lastX = x; lastY = y;
-      update();
+      const t = e.touches[0];
+      const dx = t.clientX - lastX;
+      const dy = t.clientY - lastY;
+      currentRy += dx * 0.3;
+      currentRx -= dy * 0.2;
+      currentRy = Math.max(-15, Math.min(15, currentRy));
+      currentRx = Math.max(-10, Math.min(10, currentRx));
+      velX = dx * 0.3;
+      velY = -dy * 0.2;
+      lastX = t.clientX;
+      lastY = t.clientY;
+      applyTransform();
     }
-    function onEnd() {
+
+    function onTouchEnd() {
       isDragging = false;
-      scene.style.cursor = 'grab';
       function inertia() {
-        if (Math.abs(velX) < 0.1 && Math.abs(velY) < 0.1) return;
-        ry += velX; rx += velY;
-        rx = Math.max(15, Math.min(75, rx));
-        velX *= 0.92; velY *= 0.92;
-        update();
+        if (Math.abs(velX) < 0.05 && Math.abs(velY) < 0.05 &&
+            Math.abs(currentRx) < 0.1 && Math.abs(currentRy) < 0.1) {
+          resetTransform();
+          return;
+        }
+        currentRy += velX;
+        currentRx += velY;
+        // Spring back to center
+        currentRy *= 0.9;
+        currentRx *= 0.9;
+        velX *= 0.85;
+        velY *= 0.85;
+        applyTransform();
         animFrame = requestAnimationFrame(inertia);
       }
       inertia();
     }
 
-    const md = (e) => { e.preventDefault(); onStart(e.clientX, e.clientY); };
-    const mm = (e) => onMove(e.clientX, e.clientY);
-    const mu = () => onEnd();
-    const ts = (e) => { const t = e.touches[0]; onStart(t.clientX, t.clientY); };
-    const tmv = (e) => { const t = e.touches[0]; onMove(t.clientX, t.clientY); };
-    const te = () => onEnd();
+    container.addEventListener('mousemove', onMouseMove);
+    container.addEventListener('mouseleave', onMouseLeave);
+    container.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchmove', onTouchMove, { passive: true });
+    window.addEventListener('touchend', onTouchEnd);
 
-    scene.addEventListener('mousedown', md);
-    window.addEventListener('mousemove', mm);
-    window.addEventListener('mouseup', mu);
-    scene.addEventListener('touchstart', ts, { passive: true });
-    window.addEventListener('touchmove', tmv, { passive: true });
-    window.addEventListener('touchend', te);
-    update();
-
-    // Show recipe card
-    setTimeout(() => setCardVisible(true), 600);
+    // Show card after delay
+    setTimeout(() => setCardVisible(true), 800);
 
     return () => {
       cancelAnimationFrame(animFrame);
-      scene.removeEventListener('mousedown', md);
-      window.removeEventListener('mousemove', mm);
-      window.removeEventListener('mouseup', mu);
-      scene.removeEventListener('touchstart', ts);
-      window.removeEventListener('touchmove', tmv);
-      window.removeEventListener('touchend', te);
+      container.removeEventListener('mousemove', onMouseMove);
+      container.removeEventListener('mouseleave', onMouseLeave);
+      container.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('touchend', onTouchEnd);
       setCardVisible(false);
     };
   }, [state]);
 
   return (
-    <div className="screen-inner" style={{ paddingTop: '60px' }}>
-      <div className="plate-scene" ref={sceneRef}>
-        <div className="plate-3d" ref={plateRef}>
-          <div className="plate-base" />
-          <div className="plate-rim-outer" />
-          <div className="plate-rim-inner" />
-          <div className="plate-rim-gold" />
-          <div className="plate-drizzle" />
-          <div className="steam-group">
-            <div className="steam-ln" />
-            <div className="steam-ln" />
-            <div className="steam-ln" />
-          </div>
-          <div className="plate-items">
-            {foods.map((f, i) => (
-              <div
-                key={f.id}
-                className={`plate-food ${f.pos}`}
-                style={{ animationDelay: `${0.3 + i * 0.25}s` }}
-              >
-                <img
-                  src={f.plateImg}
-                  alt={f.name}
-                  onError={(e) => {
-                    e.target.outerHTML = `<div class="emoji-fb">${f.emoji}</div>`;
-                  }}
-                />
-              </div>
-            ))}
-            {state.freeText && (
-              <div className="plate-food food-extra" style={{ animationDelay: `${0.3 + foods.length * 0.25}s` }}>
-                <div className="emoji-fb" style={{ fontSize: '1.4rem' }}>✨</div>
-              </div>
-            )}
-          </div>
-          <img src={JAR_URL} alt="Harmonie Secrète" className="plate-jar" />
-        </div>
-      </div>
+    <div className="screen-inner final-plate-inner">
+      {/* Tricolor line */}
+      <div className="final-tri" />
 
-      <div className="rotation-hint">
-        <span className="hint-icon">🔄</span> Glissez pour tourner l'assiette
+      {/* Plate image with perspective tilt */}
+      <div className="plate-image-container" ref={containerRef}>
+        <img
+          ref={imageRef}
+          src={plateImageUrl}
+          alt={recipeName}
+          className={`plate-image${imageLoaded ? ' plate-image--loaded' : ''}`}
+          onLoad={() => setImageLoaded(true)}
+          draggable={false}
+        />
+        {/* Jar badge */}
+        <div className="plate-jar-badge">
+          <img src={JAR_URL} alt="Harmonie Secrète" />
+        </div>
+        {/* Tilt hint */}
+        <div className="plate-hint">Survolez ou glissez pour explorer</div>
       </div>
 
       {/* Recipe card */}
       <div className={`recipe-card${cardVisible ? ' recipe-card--visible' : ''}`}>
-        <div className="recipe-name">{recipeName}</div>
-        <div className="recipe-tagline">Sublimé par l'Harmonie Secrète</div>
-        <div className="recipe-divider" />
+        <div className="recipe-header">
+          <div className="recipe-name">{recipeName}</div>
+          <div className="recipe-tagline">Sublimé par l'Harmonie Secrète</div>
+        </div>
 
-        {/* Details: cuisson, dressage, sauce */}
+        {/* Tricolor divider */}
+        <div className="recipe-tri" />
+
+        {/* Details badges */}
         {(cookingLevel || platingStyle || sauceLevel) && (
           <div className="recipe-details">
             {cookingLevel && (
@@ -197,6 +226,7 @@ export default function FinalPlate({ state, onRestart }) {
           </div>
         )}
 
+        {/* Ingredients */}
         <ul className="recipe-ingredients">
           {ingredients.map((ing, i) => (
             <li key={i}>
@@ -205,12 +235,14 @@ export default function FinalPlate({ state, onRestart }) {
             </li>
           ))}
         </ul>
+
+        {/* Tip */}
         <div className="recipe-tip">
-          💡 Ajoutez une cuillerée d'Harmonie Secrète en fin de cuisson — elle sublime chaque saveur sans jamais masquer le produit.
+          Ajoutez une cuillerée d'Harmonie Secrète en fin de cuisson — elle sublime chaque saveur sans jamais masquer le produit.
         </div>
       </div>
 
-      {/* CTA + Share + Restart */}
+      {/* Actions */}
       <div className="plate-actions">
         <a href={`https://l-fds.com${PRODUCT_URL}`} className="btn-primary cta-buy" target="_blank" rel="noopener">
           Commander la sauce

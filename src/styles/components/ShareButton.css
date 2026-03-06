@@ -18,9 +18,9 @@
 }
 
 .share-btn:hover {
-  background: rgba(154, 125, 62, 0.1);
-  border-color: rgba(154, 125, 62, 0.3);
-  color: var(--gold-pale);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: rgba(240, 237, 232, 0.9);
 }
 
 .share-icon {
@@ -38,10 +38,10 @@
 
 .share-btn--copied .share-copied {
   display: inline;
-  color: var(--gold);
+  color: var(--white);
 }
 
 .share-btn--copied {
-  border-color: var(--gold);
-  background: rgba(154, 125, 62, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.1);
 }

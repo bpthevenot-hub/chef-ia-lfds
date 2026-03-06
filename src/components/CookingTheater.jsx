@@ -62,28 +62,16 @@ export default function CookingTheater({ active, onComplete }) {
                 <div className="sauce-hero">
                   <img src={JAR_URL} alt="Harmonie Secrète" className="sauce-jar-hero" />
                 </div>
-                {/* Sparkle ring */}
-                <div className="sauce-sparkle-ring">
-                  {[...Array(8)].map((_, j) => (
-                    <div
-                      key={j}
-                      className="sauce-sparkle"
-                      style={{
-                        animationDelay: `${j * 0.25}s`,
-                      }}
-                    />
-                  ))}
-                </div>
-                {/* Floating gold particles */}
-                {[...Array(12)].map((_, j) => (
+                {/* Floating particles */}
+                {[...Array(10)].map((_, j) => (
                   <div
                     key={`p${j}`}
                     className="sauce-particle"
                     style={{
                       top: `${15 + Math.random() * 70}%`,
                       left: `${10 + Math.random() * 80}%`,
-                      animationDelay: `${j * 0.2}s`,
-                      animationDuration: `${2 + Math.random() * 2}s`,
+                      animationDelay: `${j * 0.25}s`,
+                      animationDuration: `${2.5 + Math.random() * 2}s`,
                     }}
                   />
                 ))}

@@ -33,7 +33,7 @@
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(154, 125, 62, 0.3) 0%,
+    rgba(200, 168, 80, 0.2) 0%,
     transparent 70%
   );
   transition: opacity 0.6s var(--ease);
@@ -53,8 +53,8 @@
   width: 6px;
   background: linear-gradient(
     to bottom,
-    rgba(184, 154, 80, 0.8),
-    rgba(154, 125, 62, 0.6)
+    rgba(200, 168, 80, 0.7),
+    rgba(180, 150, 70, 0.5)
   );
   border-radius: 3px;
   transition: height 0.6s var(--ease-luxe), opacity 0.6s var(--ease);
@@ -66,8 +66,8 @@
   height: 16px;
   background: radial-gradient(
     ellipse,
-    rgba(184, 154, 80, 0.7) 0%,
-    rgba(154, 125, 62, 0.3) 60%,
+    rgba(200, 168, 80, 0.6) 0%,
+    rgba(180, 150, 70, 0.25) 60%,
     transparent 100%
   );
   border-radius: 50%;
@@ -83,13 +83,12 @@
   gap: 4px;
   margin-top: 1rem;
   font-size: 0.7rem;
-  color: rgba(240, 235, 224, 0.4);
+  color: var(--text-muted);
   letter-spacing: 0.5px;
 }
 
 .sauce-info__dot {
-  color: var(--gold);
-  opacity: 0.5;
+  color: rgba(255, 255, 255, 0.3);
 }
 
 /* Options row */
@@ -108,7 +107,7 @@
   gap: 4px;
   padding: 1.2rem 0.8rem;
   background: rgba(255, 255, 255, 0.04);
-  border: 1.5px solid rgba(154, 125, 62, 0.15);
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius);
   cursor: pointer;
   transition: all 0.4s var(--ease);
@@ -116,15 +115,15 @@
 }
 
 .sauce-option:hover {
-  background: rgba(154, 125, 62, 0.08);
-  border-color: rgba(154, 125, 62, 0.3);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.2);
   transform: translateY(-3px);
 }
 
 .sauce-option--selected {
-  border-color: var(--gold);
-  background: rgba(154, 125, 62, 0.12);
-  box-shadow: var(--shadow-gold);
+  border-color: var(--white);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.06);
 }
 
 .sauce-option__emoji {
@@ -141,7 +140,7 @@
 
 .sauce-option__sub {
   font-size: 0.68rem;
-  color: rgba(240, 235, 224, 0.4);
+  color: var(--text-muted);
   letter-spacing: 0.5px;
 }
 
@@ -152,8 +151,8 @@
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: var(--gold);
-  color: #fff;
+  background: var(--white);
+  color: var(--text-dark);
   font-size: 11px;
   font-weight: 700;
   display: flex;
@@ -174,7 +173,7 @@
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: rgba(184, 154, 80, 0.7);
+  background: rgba(200, 168, 80, 0.6);
   animation: sauceDrip 1.5s ease-in infinite;
 }
 

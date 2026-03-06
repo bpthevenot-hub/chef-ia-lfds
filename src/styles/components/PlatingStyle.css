@@ -14,7 +14,7 @@
   gap: 14px;
   padding: 18px 20px;
   background: rgba(255, 255, 255, 0.03);
-  border: 1.5px solid rgba(154, 125, 62, 0.12);
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius);
   cursor: pointer;
   transition: all 0.4s var(--ease);
@@ -29,7 +29,7 @@
   inset: 0;
   background: linear-gradient(
     135deg,
-    rgba(154, 125, 62, 0.05) 0%,
+    rgba(255, 255, 255, 0.03) 0%,
     transparent 60%
   );
   opacity: 0;
@@ -37,7 +37,7 @@
 }
 
 .plating-option:hover {
-  border-color: rgba(154, 125, 62, 0.3);
+  border-color: rgba(255, 255, 255, 0.2);
   transform: translateY(-2px);
   box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
 }
@@ -47,9 +47,9 @@
 }
 
 .plating-option--selected {
-  border-color: var(--gold);
-  background: rgba(154, 125, 62, 0.08);
-  box-shadow: 0 8px 30px rgba(154, 125, 62, 0.2);
+  border-color: var(--white);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.06);
 }
 
 .plating-option--selected::before {
@@ -64,9 +64,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(154, 125, 62, 0.08);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: var(--radius-xs);
-  border: 1px solid rgba(154, 125, 62, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .plating-option__info {
@@ -82,7 +82,7 @@
 
 .plating-option__sub {
   font-size: 0.72rem;
-  color: var(--gold-pale);
+  color: var(--text-muted);
   letter-spacing: 1px;
   text-transform: uppercase;
   font-weight: 500;
@@ -93,7 +93,7 @@
   bottom: 6px;
   right: 16px;
   font-size: 0.68rem;
-  color: rgba(240, 235, 224, 0.3);
+  color: rgba(240, 237, 232, 0.25);
   font-style: italic;
 }
 
@@ -104,7 +104,7 @@
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: var(--gold);
+  background: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -112,7 +112,7 @@
 }
 
 .plating-option__badge span {
-  color: #fff;
+  color: var(--text-dark);
   font-size: 13px;
   font-weight: 700;
 }

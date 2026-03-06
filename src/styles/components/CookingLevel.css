@@ -13,7 +13,7 @@
   gap: 12px;
   padding: 14px 16px;
   background: rgba(255, 255, 255, 0.04);
-  border: 1.5px solid rgba(154, 125, 62, 0.12);
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all 0.35s var(--ease);
@@ -23,15 +23,15 @@
 }
 
 .cooking-level:hover {
-  background: rgba(154, 125, 62, 0.06);
-  border-color: rgba(154, 125, 62, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.2);
   transform: translateX(4px);
 }
 
 .cooking-level--selected {
-  border-color: var(--gold);
-  background: rgba(154, 125, 62, 0.1);
-  box-shadow: 0 4px 20px rgba(154, 125, 62, 0.2);
+  border-color: var(--white);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.06);
 }
 
 .cooking-level__indicator {
@@ -61,7 +61,7 @@
 
 .cooking-level__sub {
   font-size: 0.72rem;
-  color: rgba(240, 235, 224, 0.45);
+  color: rgba(240, 237, 232, 0.45);
   letter-spacing: 0.5px;
 }
 
@@ -77,8 +77,8 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: var(--gold);
-  color: #fff;
+  background: var(--white);
+  color: var(--text-dark);
   font-size: 12px;
   font-weight: 700;
   display: flex;
@@ -102,7 +102,7 @@
   overflow: hidden;
   display: flex;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  border: 2px solid rgba(154, 125, 62, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .meat-section {
@@ -120,7 +120,7 @@
 .meat-label {
   font-family: var(--serif);
   font-size: 0.9rem;
-  color: var(--gold-pale);
+  color: var(--text-muted);
   margin-top: 0.6rem;
   font-style: italic;
 }

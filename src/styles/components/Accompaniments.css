@@ -6,7 +6,7 @@
   font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--gold-pale);
+  color: var(--text-muted);
   margin: 1rem 0 0.5rem;
   text-align: left;
 }
@@ -41,7 +41,7 @@
   width: 100%;
   padding: 14px 14px 14px 42px;
   background: rgba(255, 255, 255, 0.06);
-  border: 1.5px solid rgba(154, 125, 62, 0.2);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-sm);
   color: var(--text-light);
   font-size: 0.95rem;
@@ -50,11 +50,11 @@
 }
 
 .free-input::placeholder {
-  color: rgba(240, 235, 224, 0.3);
+  color: rgba(240, 237, 232, 0.3);
 }
 
 .free-input:focus {
-  border-color: var(--gold);
+  border-color: rgba(255, 255, 255, 0.5);
   background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 0 0 3px var(--gold-glow);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
 }

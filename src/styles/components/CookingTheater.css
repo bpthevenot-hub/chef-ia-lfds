@@ -45,8 +45,8 @@
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(10, 9, 7, 0.75) 0%,
-    rgba(10, 9, 7, 0.2) 40%,
+    rgba(17, 17, 17, 0.75) 0%,
+    rgba(17, 17, 17, 0.2) 40%,
     transparent 100%
   );
 }
@@ -64,7 +64,7 @@
   font-weight: 500;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--gold-pale);
+  color: rgba(240, 237, 232, 0.5);
   margin-bottom: 4px;
 }
 
@@ -79,8 +79,8 @@
 .chef-scene--sauce {
   background: radial-gradient(
     circle at 50% 45%,
-    rgba(154, 125, 62, 0.18) 0%,
-    rgba(154, 125, 62, 0.05) 35%,
+    rgba(200, 168, 80, 0.12) 0%,
+    rgba(200, 168, 80, 0.03) 35%,
     var(--bg-dark) 65%
   );
 }
@@ -95,11 +95,11 @@
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(154, 125, 62, 0.25) 0%,
-    rgba(184, 154, 80, 0.08) 50%,
+    rgba(200, 168, 80, 0.15) 0%,
+    rgba(200, 168, 80, 0.05) 50%,
     transparent 70%
   );
-  animation: pulseGold 3s infinite;
+  animation: pulseSubtle 3s infinite;
 }
 
 .sauce-glow--outer {
@@ -107,10 +107,10 @@
   height: 400px;
   background: radial-gradient(
     circle,
-    rgba(154, 125, 62, 0.08) 0%,
+    rgba(200, 168, 80, 0.05) 0%,
     transparent 60%
   );
-  animation: pulseGold 4s 0.5s infinite;
+  animation: pulseSubtle 4s 0.5s infinite;
 }
 
 .sauce-hero {
@@ -124,47 +124,16 @@
 .sauce-jar-hero {
   width: 160px;
   filter: drop-shadow(0 10px 40px rgba(0, 0, 0, 0.6));
-  animation: float 3s ease-in-out infinite, glowPulse 3s ease-in-out infinite;
+  animation: float 3s ease-in-out infinite;
 }
 
-/* Sparkle ring around jar */
-.sauce-sparkle-ring {
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -55%);
-  width: 240px;
-  height: 240px;
-  animation: rotateSparkle 12s linear infinite;
-  z-index: 1;
-}
-
-.sauce-sparkle {
-  position: absolute;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--gold-pale);
-  animation: sparkle 2s ease-in-out infinite;
-  box-shadow: 0 0 6px rgba(212, 187, 120, 0.6);
-}
-
-.sauce-sparkle-ring .sauce-sparkle:nth-child(1) { top: 0; left: 50%; }
-.sauce-sparkle-ring .sauce-sparkle:nth-child(2) { top: 15%; right: 15%; }
-.sauce-sparkle-ring .sauce-sparkle:nth-child(3) { top: 50%; right: 0; }
-.sauce-sparkle-ring .sauce-sparkle:nth-child(4) { bottom: 15%; right: 15%; }
-.sauce-sparkle-ring .sauce-sparkle:nth-child(5) { bottom: 0; left: 50%; }
-.sauce-sparkle-ring .sauce-sparkle:nth-child(6) { bottom: 15%; left: 15%; }
-.sauce-sparkle-ring .sauce-sparkle:nth-child(7) { top: 50%; left: 0; }
-.sauce-sparkle-ring .sauce-sparkle:nth-child(8) { top: 15%; left: 15%; }
-
-/* Floating gold particles */
+/* Floating particles (warm, subtle) */
 .sauce-particle {
   position: absolute;
   width: 3px;
   height: 3px;
   border-radius: 50%;
-  background: var(--gold-light);
+  background: rgba(255, 255, 255, 0.2);
   opacity: 0;
   animation: particleRise 3s ease-out infinite;
   z-index: 1;
@@ -186,7 +155,7 @@
   font-family: var(--serif);
   font-size: 1.2rem;
   font-weight: 500;
-  color: var(--gold-pale);
+  color: rgba(240, 237, 232, 0.8);
   letter-spacing: 1px;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
@@ -194,7 +163,7 @@
 .sauce-hero-sub {
   display: block;
   font-size: 0.68rem;
-  color: rgba(212, 187, 120, 0.5);
+  color: rgba(240, 237, 232, 0.4);
   letter-spacing: 1.5px;
   text-transform: uppercase;
   margin-top: 4px;
@@ -204,7 +173,7 @@
 .cook-progress {
   width: 100%;
   height: 3px;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
   border-radius: 2px;
   margin-top: 1rem;
   overflow: hidden;
@@ -212,7 +181,7 @@
 
 .cook-progress__fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  background: linear-gradient(90deg, var(--white), rgba(240, 237, 232, 0.7));
   border-radius: 2px;
   transition: width 0.6s var(--ease);
 }

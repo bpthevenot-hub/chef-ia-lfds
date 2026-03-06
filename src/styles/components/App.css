@@ -40,7 +40,7 @@
   pointer-events: none;
 }
 
-/* Welcome: centered, no padding-top for header */
+/* Welcome: centered */
 .screen--welcome {
   justify-content: center !important;
   padding-top: 2rem !important;

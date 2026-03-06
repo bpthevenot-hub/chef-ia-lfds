@@ -23,8 +23,8 @@
 }
 
 .photo-card--selected {
-  border-color: var(--gold);
-  box-shadow: var(--shadow-gold);
+  border-color: var(--white);
+  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.1);
 }
 
 .photo-card--selected .check-badge {
@@ -73,8 +73,8 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border: 1.5px solid rgba(212, 187, 120, 0.5);
-  background: rgba(154, 125, 62, 0.12);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   display: flex;
@@ -86,7 +86,7 @@
 .photo-card__icon svg {
   width: 24px;
   height: 24px;
-  stroke: var(--gold-pale);
+  stroke: rgba(255, 255, 255, 0.7);
   fill: none;
   stroke-width: 1.5;
   stroke-linecap: round;
@@ -98,7 +98,7 @@
   font-family: var(--serif);
   font-size: 1.35rem;
   font-weight: 500;
-  color: #f0ebe0;
+  color: #f0ede8;
   letter-spacing: 0.5px;
   margin-bottom: 0.2rem;
 }
@@ -108,7 +108,7 @@
   font-family: var(--sans);
   font-size: 0.72rem;
   font-weight: 400;
-  color: rgba(240, 235, 224, 0.5);
+  color: rgba(240, 237, 232, 0.5);
   letter-spacing: 1.5px;
   text-transform: uppercase;
 }
